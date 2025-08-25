@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Pixley — it lives</title>
+  <style>
+    :root{--y:#F6D676;--bg:#0f1113;--fg:#f5f6f7;--card:#17191c;--b:#262a2f}
+    *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui}
+    .wrap{max-width:420px;margin:0 auto;padding:24px}
+    .bar{position:sticky;top:0;background:#0f1113cc;border-bottom:1px solid var(--b);backdrop-filter:blur(8px)}
+    .inner{display:flex;justify-content:center;align-items:center;gap:8px;max-width:400px;margin:0 auto;padding:12px}
+    .word{letter-spacing:.45rem;color:var(--y);font-weight:800}
+    .card{margin-top:16px;background:var(--card);border:1px solid var(--b);border-radius:14px;padding:16px}
+    a.btn{display:inline-flex;gap:8px;background:var(--y);color:#111;padding:10px 14px;border-radius:12px;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="bar"><div class="inner"><div class="word">P I X L E Y</div></div></div>
+  <main class="wrap">
+    <div class="card">
+      <h2>Deploy is working ✅</h2>
+      <p>Once this goes live, we’ll paste the full locked-in pages.</p>
+      <a class="btn" href="#" onclick="alert('hi zack')">Test Button</a>
+    </div>
+  </main>
+</body>
+</html>
