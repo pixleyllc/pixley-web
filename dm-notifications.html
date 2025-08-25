@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <title>Pixley • DMs & Notifications</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="header-stretch">
+    <div class="header-stretch-inner">
+      <div style="width:28px"></div>
+      <h1 class="wordmark">P I X L E Y</h1>
+      <div style="width:28px"></div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a class="tab" href="index.html" title="Feed">🏠</a>
+    <a class="tab" href="discover.html" title="Discover">🔍</a>
+    <a class="tab" href="post.html" title="Post">➕</a>
+    <a class="tab active" href="dm-notifications.html" title="DMs & Notifications">💬</a>
+    <a class="tab" href="profile.html" title="Profile">👤</a>
+  </nav>
+
+  <main class="page">
+    <div class="inner">
+      <section style="display:grid; grid-template-columns:1fr; gap:12px;">
+        <div style="background:var(--card); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius); padding:12px;">
+          <h3 style="margin:0 0 8px 0;">Messages</h3>
+          <div style="color:var(--muted); font-size:14px;">Sample message preview…</div>
+        </div>
+        <div style="background:var(--card); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius); padding:12px;">
+          <h3 style="margin:0 0 8px 0;">Notifications</h3>
+          <div style="color:var(--muted); font-size:14px;">Sample notification…</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script id="fb-config" type="application/json">
+  { "projectId": "pixley-4632c" }
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
