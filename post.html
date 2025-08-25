@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <title>Pixley • Post</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="header-stretch">
+    <div class="header-stretch-inner">
+      <div style="width:28px"></div>
+      <h1 class="wordmark">P I X L E Y</h1>
+      <div style="width:28px"></div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a class="tab" href="index.html" title="Feed">🏠</a>
+    <a class="tab" href="discover.html" title="Discover">🔍</a>
+    <a class="tab active" href="post.html" title="Post">➕</a>
+    <a class="tab" href="dm-notifications.html" title="DMs & Notifications">💬</a>
+    <a class="tab" href="profile.html" title="Profile">👤</a>
+  </nav>
+
+  <main class="page">
+    <div class="inner">
+      <section style="background:var(--card); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius); padding:14px; display:flex; flex-direction:column; gap:12px;">
+        <textarea placeholder="What's new?"
+          style="width:100%; min-height:120px; resize:none; background:#111215; color:var(--text); border:1px solid rgba(255,255,255,0.08); padding:12px 14px; border-radius:12px;"></textarea>
+        <div style="display:flex; gap:10px;">
+          <button class="btn" style="flex:1">Attach Photo</button>
+          <button class="btn" style="flex:1">Attach 30s Video</button>
+        </div>
+        <button class="btn primary" style="width:100%;">Post to Pixley</button>
+      </section>
+    </div>
+  </main>
+
+  <script id="fb-config" type="application/json">
+  { "projectId": "pixley-4632c" }
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
