@@ -1,58 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page="feed">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Pixley – Feed</title>
-<link rel="stylesheet" href="/assets/css/style.css" />
-<script defer src="/assets/js/app.js"></script>
-
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <title>Pixley • Feed</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <header class="header-stretch">
+  <div class="header-stretch">
     <div class="header-stretch-inner">
-      <button class="icon-btn" title="Camera">📷</button>
-      <div class="wordmark">P I X L E Y</div>
-      <button class="icon-btn" title="Menu">☰</button>
+      <div style="width:28px"></div>
+      <h1 class="wordmark">P I X L E Y</h1>
+      <div style="width:28px"></div>
     </div>
-    <nav class="tabs">
-      <a class="tab active" data-tab href="./index.html" title="Feed">🏠</a>
-      <a class="tab" data-tab href="./pixley_discover_page.html" title="Discover">🔍</a>
-      <a class="tab" data-tab href="./post tab .html" title="Post">➕</a>
-      <a class="tab" data-tab href="./pixley_dm_notifications_tab.html" title="DMs & Notifications">💬</a>
-      <a class="tab" data-tab href="./profile tab .html" title="Profile">👤</a>
-    </nav>
-  </header>
+  </div>
 
-  <main class="container">
-    <section class="story-tray">
-      <div class="story"></div><div class="story"></div><div class="story"></div>
-      <div class="story"></div><div class="story"></div><div class="story"></div>
-    </section>
+  <nav class="nav">
+    <a class="tab active" href="index.html" title="Feed">🏠</a>
+    <a class="tab" href="discover.html" title="Discover">🔍</a>
+    <a class="tab" href="post.html" title="Post">➕</a>
+    <a class="tab" href="dm-notifications.html" title="DMs & Notifications">💬</a>
+    <a class="tab" href="profile.html" title="Profile">👤</a>
+  </nav>
 
-    <article class="card">
-      <div class="post-header">
-        <div class="pfp"></div>
-        <div class="username">@nike <span class="note">VERIFIED</span></div>
-        <div class="timestamp">5m</div>
-      </div>
-      <p class="post-text">Run it like you mean it.
-        <badge class="badge-ai">Powered by Anthany Intelligence™ 🤖</badge>
-      </p>
-      <div class="post-img"></div>
-    </article>
+  <main class="page">
+    <div class="inner">
+      <!-- Stories tray -->
+      <section class="stories" id="stories">
+        <div class="story"><img src="./assets/default-pfp.jpg" alt=""><div>you</div></div>
+        <div class="story"><img src="./assets/default-pfp.jpg" alt=""><div>friend</div></div>
+      </section>
 
-    <article class="card">
-      <div class="post-header">
-        <div class="pfp"></div>
-        <div class="username">@zack</div>
-        <div class="timestamp">12m</div>
-      </div>
-      <p class="post-text">Soft yellow glow hits different.</p>
-      <div class="post-img"></div>
-    </article>
-
-    <div class="footer-spacer"></div>
+      <section class="feed" id="feed"></section>
+    </div>
   </main>
+
+  <!-- Provide your Firebase config here to enable real posts -->
+  <script id="fb-config" type="application/json">
+  { "projectId": "pixley-4632c" }
+  </script>
+  <script src="./app.js"></script>
 </body>
 </html>
