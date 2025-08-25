@@ -3,26 +3,55 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Pixley — it lives</title>
-  <style>
-    :root{--y:#F6D676;--bg:#0f1113;--fg:#f5f6f7;--card:#17191c;--b:#262a2f}
-    *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui}
-    .wrap{max-width:420px;margin:0 auto;padding:24px}
-    .bar{position:sticky;top:0;background:#0f1113cc;border-bottom:1px solid var(--b);backdrop-filter:blur(8px)}
-    .inner{display:flex;justify-content:center;align-items:center;gap:8px;max-width:400px;margin:0 auto;padding:12px}
-    .word{letter-spacing:.45rem;color:var(--y);font-weight:800}
-    .card{margin-top:16px;background:var(--card);border:1px solid var(--b);border-radius:14px;padding:16px}
-    a.btn{display:inline-flex;gap:8px;background:var(--y);color:#111;padding:10px 14px;border-radius:12px;text-decoration:none}
-  </style>
+  <title>Pixley – Feed</title>
+  <link rel="stylesheet" href="./assets/css/style.css"/>
+  <script defer src="./assets/js/app.js"></script>
 </head>
 <body>
-  <div class="bar"><div class="inner"><div class="word">P I X L E Y</div></div></div>
-  <main class="wrap">
-    <div class="card">
-      <h2>Deploy is working ✅</h2>
-      <p>Once this goes live, we’ll paste the full locked-in pages.</p>
-      <a class="btn" href="#" onclick="alert('hi zack')">Test Button</a>
+  <header class="header-stretch">
+    <div class="header-stretch-inner">
+      <button class="icon-btn" title="Camera">📷</button>
+      <div class="wordmark">P I X L E Y</div>
+      <button class="icon-btn" title="Menu">☰</button>
     </div>
+    <nav class="tabs">
+      <a class="tab active" data-tab href="./index.html" title="Feed">🏠</a>
+      <a class="tab" data-tab href="./pixley_discover_page.html" title="Discover">🔍</a>
+      <a class="tab" data-tab href="./post tab .html" title="Post">➕</a>
+      <a class="tab" data-tab href="./pixley_dm_notifications_tab.html" title="DMs & Notifications">💬</a>
+      <a class="tab" data-tab href="./profile tab .html" title="Profile">👤</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="story-tray">
+      <div class="story"></div><div class="story"></div><div class="story"></div>
+      <div class="story"></div><div class="story"></div><div class="story"></div>
+    </section>
+
+    <article class="card">
+      <div class="post-header">
+        <div class="pfp"></div>
+        <div class="username">@nike <span class="note">VERIFIED</span></div>
+        <div class="timestamp">5m</div>
+      </div>
+      <p class="post-text">Run it like you mean it.
+        <badge class="badge-ai">Powered by Anthany Intelligence™ 🤖</badge>
+      </p>
+      <div class="post-img"></div>
+    </article>
+
+    <article class="card">
+      <div class="post-header">
+        <div class="pfp"></div>
+        <div class="username">@zack</div>
+        <div class="timestamp">12m</div>
+      </div>
+      <p class="post-text">Soft yellow glow hits different.</p>
+      <div class="post-img"></div>
+    </article>
+
+    <div class="footer-spacer"></div>
   </main>
 </body>
 </html>
