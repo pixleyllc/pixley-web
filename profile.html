@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-page="profile">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <title>Pixley • Profile</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="header-stretch">
+    <div class="header-stretch-inner">
+      <div style="width:28px"></div>
+      <h1 class="wordmark">P I X L E Y</h1>
+      <div style="width:28px"></div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a class="tab" href="index.html" title="Feed">🏠</a>
+    <a class="tab" href="discover.html" title="Discover">🔍</a>
+    <a class="tab" href="post.html" title="Post">➕</a>
+    <a class="tab" href="dm-notifications.html" title="DMs & Notifications">💬</a>
+    <a class="tab active" href="profile.html" title="Profile">👤</a>
+  </nav>
+
+  <main class="page">
+    <div class="inner">
+      <section class="profile-header" id="profileHeader">
+        <img class="avatar" id="profileAvatar" src="./assets/default-pfp.jpg" alt="Profile picture">
+        <div class="profile-main">
+          <div class="handle-row">
+            <div class="username">
+              <span id="profileUsername">@username</span>
+              <span class="verified-badge">VERIFIED</span>
+            </div>
+          </div>
+          <div class="stats" id="profileStats">
+            <div><strong id="postsCount">0</strong> posts</div>
+            <div><strong id="followersCount">0</strong> followers</div>
+            <div><strong id="followingCount">0</strong> following</div>
+          </div>
+          <div class="actions">
+            <button class="btn primary" id="followBtn">Follow</button>
+            <button class="btn" onclick="location.href='account-settings.html'">Account Settings</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="feed" id="profileFeed"></section>
+    </div>
+  </main>
+
+  <script id="fb-config" type="application/json">
+  { "projectId": "pixley-4632c" }
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
