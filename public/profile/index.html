@@ -1,108 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pixley – Profile</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <style>
-    body {
-      background: #121212;
-      color: #ffdf57;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .pixley-wordmark {
-      font-size: 2.3rem;
-      letter-spacing: 12px;
-      margin-top: 24px;
-      color: #ffdf57;
-      text-align: center;
-    }
-    .profile-card {
-      background: #181818;
-      border-radius: 24px;
-      box-shadow: 0 4px 18px #0005;
-      margin: 36px auto 0 auto;
-      max-width: 380px;
-      padding: 30px 18px 22px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .profile-pic {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      border: 3px solid #ffdf57;
-      background: #232323;
-      margin-bottom: 18px;
-    }
-    .profile-username {
-      font-size: 1.4rem;
-      color: #ffdf57;
-      margin-bottom: 8px;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-    }
-    .profile-bio {
-      color: #ccc;
-      font-size: 1.02rem;
-      text-align: center;
-      margin-bottom: 14px;
-      font-family: Arial, sans-serif;
-    }
-    .profile-stats {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 18px;
-    }
-    .stat {
-      color: #ffdf57;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-    .stat-label {
-      color: #bbb;
-      font-size: 0.95rem;
-      display: block;
-      margin-top: 2px;
-      font-family: Arial, sans-serif;
-      font-weight: normal;
-    }
-    .edit-btn {
-      margin-top: 15px;
-      background: #ffdf57;
-      color: #181818;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-size: 1.11rem;
-      font-weight: bold;
-      border-radius: 15px;
-      border: none;
-      padding: 12px 32px;
-      cursor: pointer;
-      transition: background 0.17s, color 0.17s;
-      box-shadow: 0 2px 10px #ffdf5730;
-    }
-    .edit-btn:hover {
-      background: #fffbe2;
-      color: #121212;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley – Profile</title>
+<link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  <div class="pixley-wordmark">PIXLEY</div>
-  <div class="profile-card">
-    <div class="profile-pic"></div>
-    <div class="profile-username">@zackthegoat</div>
-    <div class="profile-bio">Building Pixley. Your new favorite app. 🔥</div>
-    <div class="profile-stats">
-      <div class="stat">120<br><span class="stat-label">Posts</span></div>
-      <div class="stat">4.8K<br><span class="stat-label">Followers</span></div>
-      <div class="stat">182<br><span class="stat-label">Following</span></div>
+
+<div class="pixley-wordmark">P I X L E Y</div>
+
+<div class="page">
+  <div class="inner">
+    <div class="profile-header" id="profileHeader">
+      <!-- Profile info dynamically injected here -->
     </div>
-    <button class="edit-btn" onclick="location.href='/profile/edit.html'">Edit Profile</button>
+
+    <div id="profilePosts">
+      <!-- User's posts will render here -->
+    </div>
   </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- Pixley App JS -->
+<script src="../assets/js/app.js"></script>
+
+<script>
+// Require login
+firebase.auth().onAuthStateChanged(async user => {
+  if (!user) {
+    window.location.href = '/auth/login.html';
+    return;
+  }
+
+  const profileHeader = document.getElementById('profileHeader');
+  const profilePosts = document.getElementById('profilePosts');
+
+  // Get user info
+  const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+  const userData = userDoc.data();
+
+  // Build profile header
+  profileHeader.innerHTML = `
+    <img class="avatar" src="${userData.photoURL}" alt="${userData.displayName}">
+    <div class="profile-main">
+      <div class="handle-row">
+        <div class="username">@${userData.username}</div>
+        ${userData.verified ? '<span class="verified-badge">VERIFIED</span>' : ''}
+      </div>
+      <div class="bio">${userData.bio || ''}</div>
+      <div class="stats">
+        <div><strong>${userData.postsCount || 0}</strong> Posts</div>
+        <div><strong>${userData.followersCount || 0}</strong> Followers</div>
+        <div><strong>${userData.followingCount || 0}</strong> Following</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="window.location.href='/profile/edit.html'">Edit Profile</button>
+      </div>
+    </div>
+  `;
+
+  // Load user posts
+  const postsSnapshot = await firebase.firestore().collection('posts')
+    .where('userId', '==', user.uid)
+    .orderBy('createdAt', 'desc')
+    .get();
+
+  profilePosts.innerHTML = '';
+  postsSnapshot.forEach(doc => {
+    const post = doc.data();
+    const postCard = document.createElement('div');
+    postCard.className = 'post';
+    postCard.innerHTML = `
+      <div class="post-head">
+        <div class="post-user">
+          <img src="${userData.photoURL}" alt="${userData.username}">
+          <div>@${userData.username}</div>
+        </div>
+        <div class="post-time">${new Date(post.createdAt.seconds*1000).toLocaleString()}</div>
+      </div>
+      <div class="post-caption">${post.caption}</div>
+      ${post.mediaURL ? `<div class="post-media"><img src="${post.mediaURL}" alt="post media"></div>` : ''}
+      <div class="post-actions">❤️ 🔁 💬</div>
+    `;
+    profilePosts.appendChild(postCard);
+  });
+});
+</script>
+
 </body>
 </html>
