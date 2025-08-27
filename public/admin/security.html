@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Admin: Security Logs</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .admin-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 440px;
+      padding: 32px 22px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .admin-title {
+      color: #ffdf57;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .log-list {
+      width: 100%;
+    }
+    .log-row {
+      background: #232323;
+      border-radius: 12px;
+      margin-bottom: 13px;
+      padding: 12px 15px;
+      font-size: 0.98rem;
+      color: #ffdf57;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 1px 8px #0003;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .log-event {
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: 1.05rem;
+    }
+    .log-details {
+      color: #fff;
+      font-size: 0.99rem;
+    }
+    .log-meta {
+      color: #bbb;
+      font-size: 0.93rem;
+      margin-top: 1px;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 22px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="admin-card">
+    <div class="admin-title">Security Logs</div>
+    <div class="log-list">
+      <div class="log-row">
+        <div class="log-event">Failed login attempt</div>
+        <div class="log-details">Username: <b>@zackthegoat</b> – Incorrect password entered.</div>
+        <div class="log-meta">IP: 99.88.77.66 &bull; Aug 27, 2025 2:21AM</div>
+      </div>
+      <div class="log-row">
+        <div class="log-event">Account banned</div>
+        <div class="log-details">User: <b>@spammer44</b> – Reason: Automated spam.</div>
+        <div class="log-meta">IP: 74.23.11.8 &bull; Aug 26, 2025 7:55PM</div>
+      </div>
+    </div>
+    <div class="back-link" onclick="window.location.href='/admin'">← Back to Admin Dashboard</div>
+  </div>
+</body>
+</html>
