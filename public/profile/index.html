@@ -5,21 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixley – Profile</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .page { width:100%; display:flex; justify-content:center; }
+  .inner { width:100%; max-width:420px; padding:10px 12px 80px; }
+  .profile-header {
+    background:#17171a; border-radius:16px; padding:14px;
+    display:grid; grid-template-columns:76px 1fr; gap:12px;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .avatar { width:76px; height:76px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); object-fit:cover; }
+  .profile-main { display:flex; flex-direction:column; gap:6px; }
+  .handle-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .username { font-weight:700; letter-spacing:0.2px; font-size:16px; display:flex; align-items:center; gap:8px; }
+  .verified-badge { display:inline-flex; align-items:center; gap:6px; background:#F5E27A; color:#3b3b3f; font-weight:700; font-size:11px; letter-spacing:0.4px; padding:4px 10px; border-radius:999px; }
+  .stats { display:flex; gap:16px; color:#a9a9ad; font-size:12px; }
+  .stats strong { color:#eaeaea; }
+  .actions { display:flex; gap:10px; margin-top:6px; flex-wrap:wrap; }
+  .btn { background:#222328; color:#eaeaea; border:1px solid rgba(255,255,255,0.08); padding:10px 14px; border-radius:999px; font-weight:600; font-size:13px; }
+  .btn.primary { background:#F5E27A; color:#000; box-shadow:0 0 18px rgba(245,226,122,0.35); border-color:transparent; }
+  .post { background:#17171a; border-radius:16px; border:1px solid rgba(255,255,255,0.06); overflow:hidden; margin-top:12px; padding:12px; }
+  .post-head { display:flex; align-items:center; justify-content:space-between; padding-bottom:8px; }
+  .post-user { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; }
+  .post-user img { width:28px; height:28px; border-radius:50%; }
+  .post-time { color:#a9a9ad; font-size:12px; }
+  .post-caption { font-size:14px; line-height:1.35; padding-bottom:10px; }
+  .post-media img { width:100%; height:auto; border-radius:12px; }
+</style>
 </head>
 <body>
 
 <div class="pixley-wordmark">P I X L E Y</div>
 
 <div class="page">
-  <div class="inner">
-    <div class="profile-header" id="profileHeader">
-      <!-- Profile info dynamically injected here -->
-    </div>
-
-    <div id="profilePosts">
-      <!-- User's posts will render here -->
-    </div>
-  </div>
+  <div class="inner" id="profileContent"></div>
 </div>
 
 <!-- Firebase SDKs -->
@@ -27,68 +45,65 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<!-- Pixley App JS -->
 <script src="../assets/js/app.js"></script>
 
 <script>
-// Require login
-firebase.auth().onAuthStateChanged(async user => {
-  if (!user) {
-    window.location.href = '/auth/login.html';
+firebase.auth().onAuthStateChanged(async user=>{
+  if(!user){
+    window.location.href='/auth/login.html';
     return;
   }
 
-  const profileHeader = document.getElementById('profileHeader');
-  const profilePosts = document.getElementById('profilePosts');
+  const profileContent=document.getElementById('profileContent');
+  profileContent.innerHTML='';
 
-  // Get user info
-  const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
-  const userData = userDoc.data();
+  const userDoc=await firebase.firestore().collection('users').doc(user.uid).get();
+  const data=userDoc.data();
 
-  // Build profile header
-  profileHeader.innerHTML = `
-    <img class="avatar" src="${userData.photoURL}" alt="${userData.displayName}">
+  // Profile header
+  const profileHeader=document.createElement('div');
+  profileHeader.className='profile-header';
+  profileHeader.innerHTML=`
+    <img class="avatar" src="${data.photoURL}" alt="${data.displayName}">
     <div class="profile-main">
       <div class="handle-row">
-        <div class="username">@${userData.username}</div>
-        ${userData.verified ? '<span class="verified-badge">VERIFIED</span>' : ''}
+        <div class="username">@${data.username}</div>
+        ${data.verified?'<span class="verified-badge">VERIFIED</span>':''}
       </div>
-      <div class="bio">${userData.bio || ''}</div>
       <div class="stats">
-        <div><strong>${userData.postsCount || 0}</strong> Posts</div>
-        <div><strong>${userData.followersCount || 0}</strong> Followers</div>
-        <div><strong>${userData.followingCount || 0}</strong> Following</div>
+        <div><strong>${data.postsCount||0}</strong> Posts</div>
+        <div><strong>${data.followersCount||0}</strong> Followers</div>
+        <div><strong>${data.followingCount||0}</strong> Following</div>
       </div>
       <div class="actions">
         <button class="btn primary" onclick="window.location.href='/profile/edit.html'">Edit Profile</button>
       </div>
     </div>
   `;
+  profileContent.appendChild(profileHeader);
 
-  // Load user posts
-  const postsSnapshot = await firebase.firestore().collection('posts')
-    .where('userId', '==', user.uid)
-    .orderBy('createdAt', 'desc')
+  // Load posts dynamically
+  const postsSnapshot=await firebase.firestore().collection('posts')
+    .where('userId','==',user.uid)
+    .orderBy('createdAt','desc')
     .get();
 
-  profilePosts.innerHTML = '';
-  postsSnapshot.forEach(doc => {
-    const post = doc.data();
-    const postCard = document.createElement('div');
-    postCard.className = 'post';
-    postCard.innerHTML = `
+  postsSnapshot.forEach(doc=>{
+    const post=doc.data();
+    const postDiv=document.createElement('div');
+    postDiv.className='post';
+    postDiv.innerHTML=`
       <div class="post-head">
         <div class="post-user">
-          <img src="${userData.photoURL}" alt="${userData.username}">
-          <div>@${userData.username}</div>
+          <img src="${data.photoURL}" alt="${data.username}">
+          <div>@${data.username}</div>
         </div>
         <div class="post-time">${new Date(post.createdAt.seconds*1000).toLocaleString()}</div>
       </div>
       <div class="post-caption">${post.caption}</div>
-      ${post.mediaURL ? `<div class="post-media"><img src="${post.mediaURL}" alt="post media"></div>` : ''}
-      <div class="post-actions">❤️ 🔁 💬</div>
+      ${post.mediaURL?`<div class="post-media"><img src="${post.mediaURL}" alt="media"></div>`:''}
     `;
-    profilePosts.appendChild(postCard);
+    profileContent.appendChild(postDiv);
   });
 });
 </script>
