@@ -1,4 +1,3 @@
-// ========== 1. Initialize Firebase ==========
 const firebaseConfig = {
   apiKey: "AIzaSyCI8yF4gOnTaJ--YEZ1GddgPSgNnJzlWXM",
   authDomain: "pixley-4632c.firebaseapp.com",
@@ -15,8 +14,6 @@ const auth = firebase.auth();
 const storage = firebase.storage();
 
 const feedContainer = document.getElementById('feedContainer');
-
-// ========== 2. Helper: Format Timestamp ==========
 function timeSince(date) {
   const seconds = Math.floor((new Date() - date) / 1000);
   if (seconds < 60) return `${seconds}s ago`;
@@ -33,17 +30,13 @@ function timeSince(date) {
   const years = Math.floor(days / 365);
   return `${years}y ago`;
 }
-
-// ========== 3. Render a Single Post ==========
 function renderPost(post, user) {
-  // Use user's profile pic, verified, display name, etc.
   const pfp = user?.photoURL || "https://pixley.social/assets/default-pfp.png";
   const username = user?.displayName || post.username || "user";
   const verified = user?.verified || post.verified || false;
   const timestamp = post.createdAt ? timeSince(post.createdAt.toDate()) : '';
   const caption = post.caption || '';
   const imageUrl = post.imageUrl || '';
-
   return `
     <div class="post-card">
       <div class="post-header">
@@ -54,4 +47,39 @@ function renderPost(post, user) {
         </div>
         <span class="post-timestamp">${timestamp}</span>
       </div>
-      <div class="
+      <div class="post-caption">${caption}</div>
+      ${imageUrl ? `<img class="post-image" src="${imageUrl}" alt="Post Image">` : ''}
+      <span class="ai-powered-tag">Powered by Anthany Intelligence™ 🤖</span>
+    </div>
+  `;
+}
+function listenForPosts() {
+  if (!feedContainer) return;
+  db.collection("posts")
+    .orderBy("createdAt", "desc")
+    .limit(35)
+    .onSnapshot(async (snapshot) => {
+      feedContainer.innerHTML = "";
+      if (snapshot.empty) {
+        feedContainer.innerHTML = "<div style='text-align:center;color:#888;padding:40px 0'>No posts yet. Be the first to post!</div>";
+        return;
+      }
+      const postHtmlArray = await Promise.all(snapshot.docs.map(async doc => {
+        const post = doc.data();
+        let user = null;
+        try {
+          const userSnap = await db.collection("users").doc(post.userId).get();
+          user = userSnap.exists ? userSnap.data() : null;
+        } catch { /* no user found */ }
+        return renderPost(post, user);
+      }));
+      feedContainer.innerHTML = postHtmlArray.join('');
+    });
+}
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "/log-in-form.html";
+    return;
+  }
+  listenForPosts();
+});
