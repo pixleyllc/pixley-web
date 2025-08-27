@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Followers</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .followers-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 420px;
+      padding: 32px 22px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .followers-title {
+      color: #ffdf57;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .follower {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #232323;
+      border-radius: 12px;
+      margin-bottom: 13px;
+      padding: 13px 18px;
+      width: 100%;
+      box-shadow: 0 1px 8px #0003;
+    }
+    .follower-pic {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #323232;
+      border: 2px solid #ffdf57;
+    }
+    .follower-username {
+      font-size: 1.1rem;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      flex: 1;
+    }
+    .follow-btn {
+      background: #ffdf57;
+      color: #181818;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 11px;
+      border: none;
+      padding: 8px 22px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .follow-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 22px;
+      cursor: pointer;
+      font-size: 1.09rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="followers-card">
+    <div class="followers-title">Followers</div>
+    <div class="follower">
+      <div class="follower-pic"></div>
+      <div class="follower-username">@ari_dream</div>
+      <button class="follow-btn">Remove</button>
+    </div>
+    <div class="follower">
+      <div class="follower-pic"></div>
+      <div class="follower-username">@fitguy</div>
+      <button class="follow-btn">Remove</button>
+    </div>
+    <div class="follower">
+      <div class="follower-pic"></div>
+      <div class="follower-username">@zackthegoat</div>
+      <button class="follow-btn">Remove</button>
+    </div>
+    <div class="back-link" onclick="window.location.href='/profile'">← Back to Profile</div>
+  </div>
+</body>
+</html>
