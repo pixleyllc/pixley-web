@@ -1,18 +1,14 @@
-{
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "redirects": [
-      {
-        "source": "/index.html",
-        "destination": "/",
-        "type": 301
-      }
-    ]
-    // ...any other rewrites, etc.
+"rewrites": [
+  {
+    "source": "/",
+    "destination": "/index.html"
+  },
+  {
+    "source": "/:page",
+    "destination": "/:page.html"
+  },
+  {
+    "source": "/:page/",
+    "destination": "/:page.html"
   }
-}
+]
