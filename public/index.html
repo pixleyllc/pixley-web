@@ -1,32 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixley Redirect</title>
-</head>
-<body>
-<!-- No visual content -->
-
-<!-- Firebase SDKs MUST load first -->
+<!-- 1️⃣ Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<!-- App.js must load AFTER Firebase SDKs -->
+<!-- 2️⃣ Pixley App JS (must load AFTER Firebase SDKs) -->
 <script src="assets/js/app.js"></script>
 
-<!-- Auto-redirect logic -->
+<!-- 3️⃣ Redirect logic -->
 <script>
 firebase.auth().onAuthStateChanged(user => {
   if(user){
-    // logged in → feed
+    // logged-in → feed
     window.location.href='/feed.html';
   } else {
-    // not logged in → login
+    // not logged-in → login
     window.location.href='/auth/login.html';
   }
 });
 </script>
-</body>
-</html>
