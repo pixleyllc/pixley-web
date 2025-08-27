@@ -47,7 +47,7 @@ button{cursor:pointer}
 .nav{
   width:100%; max-width:var(--maxw);
   display:flex; gap:8px; align-items:center; justify-content:space-between;
-  padding:8px 12px 10px; position:sticky; top:46px; background:var(--bg);
+  padding:8px 12px 10px;
 }
 .nav .tab{
   flex:1; display:flex; align-items:center; justify-content:center;
