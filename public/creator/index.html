@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley – Creator Dashboard</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .creator-container { max-width: 420px; margin: 40px auto; display: flex; flex-direction: column; gap: 16px; }
+  .creator-card { background: #17171a; border-radius: 16px; padding: 12px; box-shadow: 0 4px 12px #0005; }
+  .creator-card div { margin-bottom: 6px; color: #ffdf57; }
+  .creator-card button { background: #ffdf57; color: #181818; border-radius: 14px; border: none; padding: 10px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="pixley-wordmark">P I X L E Y</div>
+
+<div class="creator-container" id="creatorContainer"></div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="../assets/js/app.js"></script>
+
+<script>
+firebase.auth().onAuthStateChanged(async user => {
+  if(!user) window.location.href='/auth/login.html';
+
+  const container=document.getElementById('creatorContainer');
+  container.innerHTML='';
+
+  const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+  const data=userDoc.data();
+
+  const card=document.createElement('div');
+  card.className='creator-card';
+  card.innerHTML=`
+    <div>Username: @${data.username}</div>
+    <div>Posts: ${data.postsCount||0}</div>
+    <div>Tips Received: $${data.tipsReceived||0}</div>
+    <button onclick="window.location.href='/post/create.html'">Create New Post</button>
+  `;
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
