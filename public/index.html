@@ -6,7 +6,7 @@
   <title>Pixley Redirect</title>
 </head>
 <body>
-  <!-- NO splash content, no CTA -->
+  <!-- No visual content -->
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -20,11 +20,9 @@
   <script>
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        // User is signed in → go to feed
-        window.location.href = '/feed.html';
+        window.location.href = '/feed.html';       // Logged in → feed
       } else {
-        // User is not signed in → go to login
-        window.location.href = '/auth/login.html';
+        window.location.href = '/auth/login.html'; // Logged out → login
       }
     });
   </script>
