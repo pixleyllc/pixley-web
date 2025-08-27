@@ -17,9 +17,9 @@
     flex-direction: column;
     gap: 16px;
   }
-  .input-field { width: 100%; padding: 12px; border-radius: 14px; border: none; background: #232323; color: #ffdf57; font-family: inherit; font-size: 1rem; outline: none; margin-bottom: 12px; }
-  .submit-btn { background: #ffdf57; color: #181818; font-family: 'Bebas Neue', Arial, sans-serif; font-weight: bold; border-radius: 14px; padding: 14px; border: none; font-size: 1.1rem; cursor: pointer; box-shadow: 0 2px 12px #ffdf5733; }
-  .submit-btn:hover { background: #fffbe2; color: #121212; }
+  .input-field { width:100%; padding:12px; border-radius:14px; border:none; background:#232323; color:#ffdf57; font-family:inherit; font-size:1rem; outline:none; margin-bottom:12px; }
+  .submit-btn { background:#ffdf57; color:#181818; font-family:'Bebas Neue', Arial, sans-serif; font-weight:bold; border-radius:14px; padding:14px; border:none; font-size:1.1rem; cursor:pointer; box-shadow:0 2px 12px #ffdf5733; }
+  .submit-btn:hover { background:#fffbe2; color:#121212; }
 </style>
 </head>
 <body>
@@ -42,9 +42,8 @@
 <script src="../assets/js/app.js"></script>
 
 <script>
-// Redirect if not logged in
-firebase.auth().onAuthStateChanged(async user => {
-  if(!user) window.location.href='/auth/login.html';
+firebase.auth().onAuthStateChanged(async user=>{
+  if(!user){ window.location.href='/auth/login.html'; return; }
 
   const doc = await firebase.firestore().collection('users').doc(user.uid).get();
   const data = doc.data();
@@ -53,8 +52,7 @@ firebase.auth().onAuthStateChanged(async user => {
   document.getElementById('photoURL').value = data.photoURL || '';
 });
 
-// Save changes
-async function saveProfile() {
+async function saveProfile(){
   const user = firebase.auth().currentUser;
   if(!user) return;
 
@@ -62,11 +60,11 @@ async function saveProfile() {
   const bio = document.getElementById('bio').value;
   const photoURL = document.getElementById('photoURL').value;
 
-  try {
+  try{
     await user.updateProfile({ displayName, photoURL });
     await firebase.firestore().collection('users').doc(user.uid).update({ displayName, bio, photoURL });
     alert('Profile updated!');
-  } catch(err) {
+  }catch(err){
     alert('Error: ' + err.message);
   }
 }
