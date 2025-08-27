@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Discover</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      margin-top: 24px;
+      font-size: 2.3rem;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      letter-spacing: 11px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .search-bar {
+      margin: 26px auto 10px auto;
+      width: 90vw;
+      max-width: 420px;
+      display: flex;
+      justify-content: center;
+    }
+    .search-input {
+      width: 100%;
+      font-size: 1.13rem;
+      padding: 14px 20px;
+      border-radius: 15px;
+      border: none;
+      background: #232323;
+      color: #ffdf57;
+      font-family: inherit;
+      letter-spacing: 1px;
+      outline: none;
+      margin-right: 2px;
+    }
+    .discover-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      max-width: 420px;
+      margin: 14px auto;
+      padding: 0 3vw;
+    }
+    .grid-item {
+      background: #181818;
+      border-radius: 13px;
+      min-height: 90px;
+      box-shadow: 0 1px 10px #0002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #bbb;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+    }
+    .placeholder {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">P I X L E Y</div>
+  <div class="search-bar">
+    <input class="search-input" type="text" placeholder="Search Pixley 🔍" />
+  </div>
+  <div class="discover-grid">
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+    <div class="grid-item placeholder">PFP</div>
+  </div>
+</body>
+</html>
