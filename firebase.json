@@ -1,14 +1,31 @@
-"rewrites": [
-  {
-    "source": "/",
-    "destination": "/index.html"
-  },
-  {
-    "source": "/:page",
-    "destination": "/:page.html"
-  },
-  {
-    "source": "/:page/",
-    "destination": "/:page.html"
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/:page",
+        "destination": "/:page.html"
+      },
+      {
+        "source": "/:page/",
+        "destination": "/:page.html"
+      }
+    ]
   }
-]
+}
