@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – DM Requests</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 10px;
+      margin-top: 20px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .requests-list {
+      max-width: 390px;
+      margin: 36px auto 0 auto;
+      padding: 0 6vw;
+    }
+    .request-item {
+      background: #181818;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0004;
+      margin-bottom: 16px;
+      padding: 18px 14px 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      transition: background 0.15s;
+    }
+    .request-pic {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #232323;
+      margin-right: 6px;
+    }
+    .request-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .request-username {
+      font-size: 1.1rem;
+      color: #ffdf57;
+      letter-spacing: 1px;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+    }
+    .request-message {
+      font-size: 0.97rem;
+      color: #bbb;
+      font-family: Arial, sans-serif;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .btn {
+      background: #ffdf57;
+      color: #181818;
+      border: none;
+      border-radius: 11px;
+      padding: 7px 20px;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-size: 1.02rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .ignore {
+      background: #232323;
+      color: #ffdf57;
+      border: 1.3px solid #ffdf57;
+    }
+    .ignore:hover {
+      background: #181818;
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="requests-list">
+    <div class="request-item">
+      <div class="request-pic"></div>
+      <div class="request-info">
+        <div class="request-username">publicfigure22</div>
+        <div class="request-message">Hey! Love your content. Mind checking out my profile?</div>
+      </div>
+      <div class="actions">
+        <button class="btn">Accept</button>
+        <button class="btn ignore">Ignore</button>
+      </div>
+    </div>
+    <div class="request-item">
+      <div class="request-pic"></div>
+      <div class="request-info">
+        <div class="request-username">dev_paul</div>
+        <div class="request-message">Can you beta test a feature for me?</div>
+      </div>
+      <div class="actions">
+        <button class="btn">Accept</button>
+        <button class="btn ignore">Ignore</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
