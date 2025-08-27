@@ -5,19 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixley – Create Post</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .post-card {
+    max-width: 420px;
+    margin: 40px auto;
+    background: #181818;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 16px #0005;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .input-field, textarea { width: 100%; padding: 12px; border-radius: 14px; border: none; background: #232323; color: #ffdf57; font-family: inherit; font-size: 1rem; outline: none; margin-bottom: 12px; }
+  .submit-btn { background: #ffdf57; color: #181818; font-family: 'Bebas Neue', Arial, sans-serif; font-weight: bold; border-radius: 14px; padding: 14px; border: none; font-size: 1.1rem; cursor: pointer; box-shadow: 0 2px 12px #ffdf5733; }
+  .submit-btn:hover { background: #fffbe2; color: #121212; }
+</style>
 </head>
 <body>
 
 <div class="pixley-wordmark">P I X L E Y</div>
 
-<div class="page">
-  <div class="inner">
-    <div class="create-post-card">
-      <textarea id="caption" class="input-field" placeholder="Write something..."></textarea>
-      <input id="mediaURL" class="input-field" type="text" placeholder="Image/Video URL (optional)">
-      <button class="submit-btn" onclick="createPost()">Post</button>
-    </div>
-  </div>
+<div class="post-card">
+  <textarea id="caption" class="input-field" placeholder="Write something..." required></textarea>
+  <input id="mediaURL" class="input-field" type="text" placeholder="Image/Video URL (optional)">
+  <button class="submit-btn" onclick="createPost()">Post</button>
 </div>
 
 <!-- Firebase SDKs -->
@@ -29,40 +41,33 @@
 <script src="../assets/js/app.js"></script>
 
 <script>
-// Require login
-firebase.auth().onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = '/auth/login.html';
-  }
+firebase.auth().onAuthStateChanged(user=>{
+  if(!user) window.location.href='/auth/login.html';
 });
 
-async function createPost() {
-  const user = firebase.auth().currentUser;
-  if (!user) return;
+async function createPost(){
+  const user=firebase.auth().currentUser;
+  if(!user) return;
 
-  const caption = document.getElementById('caption').value;
-  const mediaURL = document.getElementById('mediaURL').value;
+  const caption=document.getElementById('caption').value;
+  const mediaURL=document.getElementById('mediaURL').value;
 
-  if (!caption) {
+  if(!caption){
     alert('Caption cannot be empty.');
     return;
   }
 
-  try {
-    await firebase.firestore().collection('posts').add({
-      userId: user.uid,
-      username: user.displayName,
-      userPhotoURL: user.photoURL,
-      caption,
-      mediaURL: mediaURL || '',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+  await firebase.firestore().collection('posts').add({
+    userId: user.uid,
+    username: user.displayName,
+    userPhotoURL: user.photoURL,
+    caption,
+    mediaURL: mediaURL || '',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
 
-    alert('Post created!');
-    window.location.href = '/feed.html'; // Redirect to feed after post
-  } catch (err) {
-    alert('Error creating post: ' + err.message);
-  }
+  alert('Post created!');
+  window.location.href='/feed.html';
 }
 </script>
 
