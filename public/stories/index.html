@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley – Stories</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .stories-container { max-width: 420px; margin: 40px auto; display: flex; flex-direction: column; gap: 12px; }
+  .story-card { background: #17171a; border-radius: 16px; padding: 12px; box-shadow: 0 4px 12px #0005; display: flex; align-items: center; gap: 12px; }
+  .story-card img { width: 60px; height: 60px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<div class="pixley-wordmark">P I X L E Y</div>
+
+<div class="stories-container" id="storiesContainer"></div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="../assets/js/app.js"></script>
+
+<script>
+firebase.auth().onAuthStateChanged(async user => {
+  if(!user) window.location.href='/auth/login.html';
+  
+  const container=document.getElementById('storiesContainer');
+  container.innerHTML='';
+  
+  const storiesSnapshot = await firebase.firestore().collection('stories').orderBy('createdAt','desc').limit(50).get();
+  storiesSnapshot.forEach(doc => {
+    const story = doc.data();
+    const storyCard=document.createElement('div');
+    storyCard.className='story-card';
+    storyCard.innerHTML=`<img src="${story.photoURL}" alt="${story.username}"><div>@${story.username}</div>`;
+    container.appendChild(storyCard);
+  });
+});
+</script>
+
+</body>
+</html>
