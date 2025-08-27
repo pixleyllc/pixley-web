@@ -11,6 +11,11 @@
         "source": "/index.html",
         "destination": "/",
         "type": 301
+      },
+      {
+        "source": "/:page.html",
+        "destination": "/:page",
+        "type": 301
       }
     ],
     "rewrites": [
