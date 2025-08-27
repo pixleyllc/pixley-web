@@ -6,14 +6,14 @@
 <title>Pixley – Feed</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  .feed-container { max-width: 420px; margin: 0 auto; padding: 12px; }
-  .story-tray { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 12px; }
-  .story { width: 70px; text-align: center; color: #ffdf57cc; }
-  .story img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid #F5E27A; box-shadow: 0 0 18px rgba(245,226,122,0.35); }
-  .post-card { background: #17171a; border-radius: 16px; margin-bottom: 12px; padding: 12px; box-shadow: 0 4px 12px #0005; }
-  .post-user { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: bold; }
-  .post-user img { width: 28px; height: 28px; border-radius: 50%; }
-  .post-caption { font-size: 14px; line-height: 1.35; margin-bottom: 8px; }
+  .feed-container { max-width: 420px; margin: 12px auto; padding: 12px; }
+  .post-card { background:#17171a; border-radius:16px; margin-bottom:12px; padding:12px; box-shadow:0 4px 12px #0005; }
+  .post-user { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-weight:bold; }
+  .post-user img { width:28px; height:28px; border-radius:50%; }
+  .post-caption { font-size:14px; line-height:1.35; margin-bottom:8px; }
+  .post-media img { width:100%; height:auto; border-radius:12px; }
+  .post-actions { display:flex; gap:12px; font-size:18px; }
+  .pixley-wordmark { font-family:'Bebas Neue', Arial, sans-serif; font-size:22px; letter-spacing:.35rem; color:#F5E27A; text-align:center; margin:12px 0; }
 </style>
 </head>
 <body>
@@ -27,51 +27,37 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<!-- Pixley App JS -->
+<!-- App JS -->
 <script src="assets/js/app.js"></script>
 
 <script>
-// Require login
 firebase.auth().onAuthStateChanged(async user => {
   if(!user){
     window.location.href='/auth/login.html';
     return;
   }
 
-  const feedContainer = document.getElementById('feedContainer');
-  feedContainer.innerHTML='';
+  const container = document.getElementById('feedContainer');
+  container.innerHTML='';
 
-  // Load dynamic stories
-  const storiesSnapshot = await firebase.firestore().collection('stories')
-    .orderBy('createdAt','desc').limit(20).get();
-  const storyTray = document.createElement('div');
-  storyTray.className='story-tray';
-  storiesSnapshot.forEach(doc => {
-    const story = doc.data();
-    const storyEl = document.createElement('div');
-    storyEl.className='story';
-    storyEl.innerHTML=`<img src="${story.photoURL}" alt="${story.username}"><div>@${story.username}</div>`;
-    storyTray.appendChild(storyEl);
-  });
-  feedContainer.appendChild(storyTray);
-
-  // Load dynamic posts
+  // Load posts dynamically
   const postsSnapshot = await firebase.firestore().collection('posts')
     .orderBy('createdAt','desc').limit(50).get();
-  postsSnapshot.forEach(doc=>{
+
+  postsSnapshot.forEach(doc => {
     const post = doc.data();
-    const postCard = document.createElement('div');
-    postCard.className='post-card';
-    postCard.innerHTML=`
+    const postDiv = document.createElement('div');
+    postDiv.className = 'post-card';
+    postDiv.innerHTML = `
       <div class="post-user">
         <img src="${post.userPhotoURL}" alt="${post.username}">
         <div>@${post.username}</div>
       </div>
       <div class="post-caption">${post.caption}</div>
-      ${post.mediaURL?`<img src="${post.mediaURL}" style="width:100%; border-radius:12px;">`:''}
+      ${post.mediaURL?`<div class="post-media"><img src="${post.mediaURL}" alt="media"></div>`:''}
       <div class="post-actions">❤️ 🔁 💬</div>
     `;
-    feedContainer.appendChild(postCard);
+    container.appendChild(postDiv);
   });
 });
 </script>
