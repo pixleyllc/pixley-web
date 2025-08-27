@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pixley • Log In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #181818;
+      min-height: 100vh;
+    }
+    .login-container {
+      max-width: 340px;
+      margin: 40px auto 0 auto;
+      background: #232323;
+      border-radius: 1.6rem;
+      box-shadow: 0 4px 18px 0 rgba(0,0,0,0.13);
+      padding: 34px 30px 32px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .login-title {
+      font-family: 'Bebas Neue', sans-serif;
+      color: #f9e576;
+      font-size: 2rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: bold;
+      user-select: none;
+    }
+    .login-form label {
+      font-family: 'Bebas Neue', sans-serif;
+      color: #f9e576;
+      font-size: 1.13rem;
+      margin-bottom: 3px;
+      display: block;
+      letter-spacing: 0.03em;
+    }
+    .login-input {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      margin-bottom: 17px;
+      border-radius: 0.8rem;
+      border: none;
+      background: #181818;
+      color: #f9e576;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.03em;
+      outline: none;
+      box-shadow: 0 1px 6px 0 rgba(0,0,0,0.13);
+      transition: box-shadow 0.13s;
+    }
+    .login-input:focus {
+      box-shadow: 0 0 0 2px #f9e5767a;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 12px 0;
+      background: #f9e576;
+      color: #232323;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.13rem;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      border-radius: 1rem;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 10px 0 rgba(249,229,118,0.09);
+      transition: background 0.13s;
+    }
+    .login-btn:hover {
+      background: #fff5b2;
+    }
+    .alt-links {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .alt-links a {
+      color: #f9e576;
+      text-decoration: underline;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      margin: 0 7px;
+    }
+    .login-error {
+      color: #ff6565;
+      font-size: 0.98rem;
+      font-family: 'Bebas Neue', sans-serif;
+      margin-bottom: 8px;
+      min-height: 22px;
+      text-align: center;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script>
+    // --- YOUR REAL CONFIG HERE ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyCI8yF4gOnTaJ--YEZ1GddgPSgNnJzlWXM",
+      authDomain: "pixley-4632c.firebaseapp.com",
+      projectId: "pixley-4632c",
+      storageBucket: "pixley-4632c.appspot.com",
+      messagingSenderId: "1006119196484",
+      appId: "1:1006119196484:web:d7c48070f62b9b42f0a911",
+      measurementId: "G-R56"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    window.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      const errorBox = document.getElementById("loginError");
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        errorBox.textContent = "";
+        const email = form.email.value.trim();
+        const password = form.password.value;
+        auth.signInWithEmailAndPassword(email, password)
+          .then(() => {
+            window.location.href = "feed.html";
+          })
+          .catch(err => {
+            errorBox.textContent = "Invalid login. Try again.";
+          });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="pixley-header">
+    <div class="pixley-wordmark">P I X L E Y</div>
+    <nav class="pixley-nav-bar">
+      <a href="feed.html" class="nav-icon" title="Feed"><span>🏠</span></a>
+      <a href="discover.html" class="nav-icon" title="Discover"><span>🔍</span></a>
+      <a href="post.html" class="nav-icon" title="Post"><span>➕</span></a>
+      <a href="dm.html" class="nav-icon" title="DMs & Notifications"><span>💬</span></a>
+      <a href="profile.html" class="nav-icon" title="Profile"><span>👤</span></a>
+    </nav>
+  </div>
+  <div class="login-container">
+    <div class="login-title">Log In</div>
+    <form class="login-form" id="loginForm" autocomplete="off">
+      <div class="login-error" id="loginError"></div>
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" name="email" class="login-input" required autocomplete="username">
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" name="password" class="login-input" required autocomplete="current-password">
+      <button type="submit" class="login-btn">Log In</button>
+    </form>
+    <div class="alt-links">
+      <a href="password-reset.html">Forgot password?</a>
+      <a href="sign-up.html">Create account</a>
+    </div>
+  </div>
+</body>
+</html>
