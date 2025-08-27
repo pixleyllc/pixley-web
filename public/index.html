@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixley Redirect</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley Redirect</title>
 </head>
 <body>
-  <!-- No visual content -->
+<!-- No visual content -->
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<!-- Firebase SDKs MUST load first -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  <!-- Pixley App JS -->
-  <script src="assets/js/app.js"></script>
+<!-- App.js must load AFTER Firebase SDKs -->
+<script src="assets/js/app.js"></script>
 
-  <!-- Auto-redirect logic -->
-  <script>
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        window.location.href = '/feed.html';       // Logged in → feed
-      } else {
-        window.location.href = '/auth/login.html'; // Logged out → login
-      }
-    });
-  </script>
+<!-- Auto-redirect logic -->
+<script>
+firebase.auth().onAuthStateChanged(user => {
+  if(user){
+    // logged in → feed
+    window.location.href='/feed.html';
+  } else {
+    // not logged in → login
+    window.location.href='/auth/login.html';
+  }
+});
+</script>
 </body>
 </html>
