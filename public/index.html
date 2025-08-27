@@ -1,32 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixley – Home</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- LOCKED BRANDING STYLE -->
+  <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    body {
-      background: #121212;
-      color: #ffdf57;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .pixley-wordmark {
-      margin-top: 32px;
-      font-size: 3rem;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      letter-spacing: 16px;
-      color: #ffdf57;
-    }
     .subtitle {
+      text-align: center;
       margin-top: 12px;
-      color: #bbb;
-      font-size: 1.25rem;
-      letter-spacing: 2px;
-      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: #ffdf57cc;
     }
     .cta-btn {
       display: inline-block;
@@ -51,8 +37,24 @@
   </style>
 </head>
 <body>
+  <!-- Wordmark -->
   <div class="pixley-wordmark">P I X L E Y</div>
-  <div class="subtitle">Built for creators. Get paid for your content. <br>Welcome to the future of social media.</div>
+
+  <!-- Subtitle -->
+  <div class="subtitle">
+    Built for creators. Get paid for your content. <br>
+    Welcome to the future of social media.
+  </div>
+
+  <!-- Call-to-action -->
   <a class="cta-btn" href="/auth/signup">Get Started</a>
+
+  <!-- ===== Firebase SDKs ===== -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <!-- ===== Pixley App JS ===== -->
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
