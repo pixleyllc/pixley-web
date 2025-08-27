@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Appeal a Ban or Action</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .appeal-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 420px;
+      padding: 32px 22px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .appeal-title {
+      color: #ffdf57;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .input-field, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      border: none;
+      background: #232323;
+      color: #ffdf57;
+      font-size: 1rem;
+      font-family: inherit;
+      letter-spacing: 1px;
+      outline: none;
+    }
+    textarea.input-field {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .send-btn {
+      width: 100%;
+      background: #ffdf57;
+      color: #181818;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-weight: bold;
+      border-radius: 14px;
+      padding: 14px;
+      border: none;
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #ffdf5733;
+      transition: background 0.17s, color 0.17s;
+      margin-bottom: 10px;
+    }
+    .send-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .appeal-note {
+      color: #bbb;
+      font-family: Arial, sans-serif;
+      font-size: 0.99rem;
+      margin-bottom: 10px;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 18px;
+      cursor: pointer;
+      font-size: 1.07rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="appeal-card">
+    <div class="appeal-title">Appeal a Ban or Action</div>
+    <div class="appeal-note">
+      If your account has been banned, restricted, or you wish to dispute an action, please fill out this form.<br>
+      <b>Note:</b> Submitting false or abusive appeals may result in permanent loss of access.
+    </div>
+    <form>
+      <input class="input-field" type="text" placeholder="Your Username" required>
+      <input class="input-field" type="email" placeholder="Your Email" required>
+      <textarea class="input-field" placeholder="Explain why your account or content should be reinstated..." required></textarea>
+      <button class="send-btn" type="submit">Submit Appeal</button>
+    </form>
+    <div class="back-link" onclick="window.location.href='/'">← Back to Home</div>
+  </div>
+</body>
+</html>
