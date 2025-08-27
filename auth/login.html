@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login • Pixley</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div style="max-width:400px; margin:40px auto; background:var(--card); border-radius:16px; box-shadow:0 2px 24px #0003; padding:32px;">
+    <h1 class="wordmark" style="text-align:center;">P I X L E Y</h1>
+    <h2 style="color:var(--pixley-yellow); text-align:center; margin-bottom:24px;">Sign in to your account</h2>
+    <input type="email" id="email" placeholder="Email" style="width:100%;padding:12px 14px;margin-bottom:14px;border-radius:8px;border:1px solid #222;background:#18181b;color:#eaeaea;">
+    <input type="password" id="password" placeholder="Password" style="width:100%;padding:12px 14px;margin-bottom:18px;border-radius:8px;border:1px solid #222;background:#18181b;color:#eaeaea;">
+    <button onclick="login()" class="btn primary" style="width:100%;margin-bottom:10px;">Login</button>
+    <button onclick="signup()" class="btn" style="width:100%;margin-bottom:14px;">Sign Up</button>
+    <button onclick="googleSignIn()" class="btn" style="width:100%;background:#fff;color:#111;font-weight:600;">Sign in with Google</button>
+    <div id="loginError" style="color:#ff8b8b;text-align:center;margin-top:18px;font-size:14px;"></div>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    
+    // === Your actual Firebase config ===
+    const firebaseConfig = {
+      apiKey: "YOUR_FIREBASE-API-KEY-HERE",
+      authDomain: "pixley-4632c.firebaseapp.com",
+      projectId: "pixley-4632c",
+      storageBucket: "pixley-4632c.firebasestorage.app",
+      messagingSenderId: "1006119196484",
+      appId: "1:1006119196484:web:d7c48070f62b9b42f0a911",
+      measurementId: "G-R56KM3Y9VD"
+    };
+    // ================================
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    window.login = async function() {
+      const email = document.getElementById('email').value;
+      const pass = document.getElementById('password').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        window.location.href = "index.html";
+      } catch (err) {
+        document.getElementById('loginError').textContent = err.message;
+      }
+    };
+
+    window.signup = async function() {
+      const email = document.getElementById('email').value;
+      const pass = document.getElementById('password').value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, pass);
+        window.location.href = "index.html";
+      } catch (err) {
+        document.getElementById('loginError').textContent = err.message;
+      }
+    };
+
+    window.googleSignIn = async function() {
+      try {
+        await signInWithPopup(auth, provider);
+        window.location.href = "index.html";
+      } catch (err) {
+        document.getElementById('loginError').textContent = err.message;
+      }
+    };
+  </script>
+</body>
+</html>
