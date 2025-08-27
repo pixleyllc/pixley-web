@@ -2,44 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pixley • Feed</title>
+  <title>Pixley • Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <!-- Bebas Neue font -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <!-- Pixley CSS -->
   <link rel="stylesheet" href="style.css">
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <!-- Firebase SDKs (only needed if you add dynamic logic to this page) -->
 </head>
 <body>
-  <!-- Header/Wordmark -->
-  <div class="header-stretch-outer">
-    <div class="header-stretch-inner">
-      <div class="pixley-wordmark">P I X L<br>E Y</div>
-      <nav class="nav-bar">
-        <a href="feed.html" class="nav-icon active" title="Feed"><span>🏠</span></a>
-        <a href="discover.html" class="nav-icon" title="Discover"><span>🔍</span></a>
-        <a href="post.html" class="nav-icon" title="Post"><span>➕</span></a>
-        <a href="dm.html" class="nav-icon" title="DMs & Notifications"><span>💬</span></a>
-        <a href="profile.html" class="nav-icon" title="Profile"><span>👤</span></a>
-      </nav>
+  <div class="pixley-header">
+    <div class="pixley-wordmark">P I X L<br>E Y</div>
+    <nav class="pixley-nav-bar">
+      <a href="feed.html" class="nav-icon" title="Feed"><span>🏠</span></a>
+      <a href="discover.html" class="nav-icon" title="Discover"><span>🔍</span></a>
+      <a href="post.html" class="nav-icon" title="Post"><span>➕</span></a>
+      <a href="dm.html" class="nav-icon" title="DMs & Notifications"><span>💬</span></a>
+      <a href="profile.html" class="nav-icon" title="Profile"><span>👤</span></a>
+    </nav>
+  </div>
+
+  <main class="home-main-content">
+    <div class="welcome-card">
+      <h1>Welcome to Pixley</h1>
+      <p>Pixley is built for creators. Post photos, share moments, DM your friends, and show off your verified badge! 🚀</p>
+      <p>
+        <a href="feed.html" class="home-btn">Go to Feed</a>
+      </p>
     </div>
-  </div>
-
-  <!-- Story Tray -->
-  <div id="storyTray" class="story-tray">
-    <!-- Stories go here (future step) -->
-  </div>
-
-  <!-- Feed Container -->
-  <div id="feedContainer" class="feed-container">
-    <!-- Posts will load here from Firestore -->
-  </div>
-
-  <!-- Firebase + Feed JS -->
-  <script src="app.js"></script>
+  </main>
 </body>
 </html>
