@@ -1,82 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixley – Sign Up</title>
-
-  <!-- Locked-in CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-
-  <style>
-    .auth-card {
-      max-width: 420px;
-      margin: 60px auto;
-      background: #181818;
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 4px 16px #0005;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .auth-title {
-      color: #ffdf57;
-      font-size: 1.4rem;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .input-field {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 16px;
-      border-radius: 14px;
-      border: none;
-      background: #232323;
-      color: #ffdf57;
-      font-size: 1rem;
-      font-family: inherit;
-      outline: none;
-    }
-    .submit-btn {
-      width: 100%;
-      background: #ffdf57;
-      color: #181818;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-weight: bold;
-      border-radius: 14px;
-      padding: 14px;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 12px #ffdf5733;
-      transition: background 0.17s, color 0.17s;
-    }
-    .submit-btn:hover { background: #fffbe2; color: #121212; }
-    .back-link {
-      color: #ffdf57;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 1.07rem;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley – Sign Up</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .signup-card {
+    max-width: 420px;
+    margin: 60px auto;
+    background: #181818;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 16px #0005;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: #232323;
+    color: #ffdf57;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 12px;
+  }
+  .submit-btn {
+    background: #ffdf57;
+    color: #181818;
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    font-weight: bold;
+    border-radius: 14px;
+    padding: 14px;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px #ffdf5733;
+  }
+  .submit-btn:hover { background: #fffbe2; color: #121212; }
+  .link-text { color: #ffdf57; cursor: pointer; text-decoration: underline; font-size: 0.95rem; }
+</style>
 </head>
 <body>
 
 <div class="pixley-wordmark">P I X L E Y</div>
 
-<div class="auth-card">
-  <div class="auth-title">Create Your Account</div>
-
+<div class="signup-card">
+  <div class="signup-title">Create a Pixley Account</div>
   <input id="displayName" class="input-field" type="text" placeholder="Display Name" required>
   <input id="email" class="input-field" type="email" placeholder="Email" required>
   <input id="password" class="input-field" type="password" placeholder="Password" required>
-  <button class="submit-btn" onclick="pixleyRegister(email.value, password.value)">Sign Up</button>
-
-  <div class="back-link" onclick="window.location.href='login.html'">← Already have an account? Login</div>
+  <button class="submit-btn" onclick="signupUser()">Sign Up</button>
+  <div class="link-text" onclick="window.location.href='/auth/login.html'">Already have an account? Login</div>
 </div>
 
 <!-- Firebase SDKs -->
@@ -86,6 +65,53 @@
 
 <!-- Pixley App JS -->
 <script src="../assets/js/app.js"></script>
+
+<script>
+// Redirect if already logged in
+firebase.auth().onAuthStateChanged(user => {
+  if(user){
+    window.location.href='/feed.html';
+  }
+});
+
+// Signup function
+async function signupUser() {
+  const displayName = document.getElementById('displayName').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  if(!displayName || !email || !password){
+    alert('Please fill all fields.');
+    return;
+  }
+
+  try {
+    const userCred = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    await userCred.user.updateProfile({ displayName });
+
+    // Create Firestore user doc
+    await firebase.firestore().collection('users').doc(userCred.user.uid).set({
+      username: displayName.replace(/\s+/g,'').toLowerCase(),
+      displayName,
+      email,
+      bio: '',
+      photoURL: '',
+      postsCount: 0,
+      followersCount: 0,
+      followingCount: 0,
+      tipsReceived: 0,
+      verified: false,
+      dmsEnabled: true,
+      notifications: true,
+      visibility: 'public'
+    });
+
+    window.location.href='/feed.html';
+  } catch(err) {
+    alert('Signup failed: ' + err.message);
+  }
+}
+</script>
 
 </body>
 </html>
