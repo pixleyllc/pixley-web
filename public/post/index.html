@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Post Feed</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .feed-wrapper {
+      max-width: 420px;
+      margin: 36px auto 0 auto;
+      padding: 0 3vw;
+    }
+    .feed-post {
+      background: #181818;
+      border-radius: 18px;
+      box-shadow: 0 4px 14px #0004;
+      margin-bottom: 28px;
+      padding: 22px 16px 12px 16px;
+      position: relative;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .profile-pic {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid #ffdf57;
+      background: #232323;
+      margin-right: 12px;
+      display: inline-block;
+    }
+    .username {
+      font-size: 1.18rem;
+      color: #ffdf57;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .timestamp {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 0.96rem;
+      letter-spacing: 1px;
+    }
+    .post-content {
+      font-size: 1.02rem;
+      margin: 10px 0 12px 0;
+      color: #fff;
+      word-break: break-word;
+    }
+    .post-img {
+      width: 100%;
+      border-radius: 14px;
+      margin: 0 0 12px 0;
+      box-shadow: 0 4px 12px #0003;
+    }
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border-top: 1.1px solid #232323;
+      margin: 0 -16px;
+      padding: 10px 7px 4px 7px;
+    }
+    .action-btn {
+      background: none;
+      border: none;
+      color: #ffdf57;
+      font-size: 1.28rem;
+      border-radius: 50%;
+      padding: 7px 11px;
+      cursor: pointer;
+      margin: 0 2px;
+      box-shadow: 0 0 0 #ffdf5730;
+      transition: background 0.13s;
+      position: relative;
+    }
+    .action-btn:hover {
+      background: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="feed-wrapper">
+    <div class="feed-post">
+      <div class="post-header">
+        <div class="profile-pic"></div>
+        <span class="username">@ari_dream</span>
+        <span class="timestamp">2m ago</span>
+      </div>
+      <div class="post-content">
+        First post on Pixley! Loving the vibes here. 🔥
+      </div>
+      <img class="post-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=600&q=80" alt="demo"/>
+      <div class="post-actions">
+        <button class="action-btn" title="Like">❤️</button>
+        <button class="action-btn" title="Comment">💬</button>
+        <button class="action-btn" title="Share">🔗</button>
+      </div>
+    </div>
+    <div class="feed-post">
+      <div class="post-header">
+        <div class="profile-pic"></div>
+        <span class="username">@zackthegoat</span>
+        <span class="timestamp">7m ago</span>
+      </div>
+      <div class="post-content">
+        Building the next-gen social app. #Pixley
+      </div>
+      <img class="post-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?fit=crop&w=600&q=80" alt="demo"/>
+      <div class="post-actions">
+        <button class="action-btn" title="Like">❤️</button>
+        <button class="action-btn" title="Comment">💬</button>
+        <button class="action-btn" title="Share">🔗</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
