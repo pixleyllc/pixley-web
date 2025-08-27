@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Notification Settings</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .notif-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 420px;
+      padding: 32px 22px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .notif-title {
+      color: #ffdf57;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .setting-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 17px;
+    }
+    .setting-label {
+      color: #bbb;
+      font-family: Arial, sans-serif;
+      font-size: 1.03rem;
+    }
+    .toggle-switch {
+      width: 48px;
+      height: 26px;
+      border-radius: 13px;
+      background: #232323;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s;
+      border: 1.2px solid #ffdf57;
+    }
+    .toggle-slider {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffdf57;
+      transition: left 0.17s;
+    }
+    .toggle-on .toggle-slider {
+      left: 25px;
+      background: #ffdf57;
+    }
+    .save-btn {
+      width: 100%;
+      background: #ffdf57;
+      color: #181818;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-weight: bold;
+      border-radius: 14px;
+      padding: 14px;
+      border: none;
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #ffdf5733;
+      transition: background 0.17s, color 0.17s;
+      margin-top: 10px;
+    }
+    .save-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 18px;
+      cursor: pointer;
+      font-size: 1.07rem;
+    }
+  </style>
+  <script>
+    function toggle(elem) {
+      elem.classList.toggle('toggle-on');
+    }
+  </script>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="notif-card">
+    <div class="notif-title">Notification Settings</div>
+    <form>
+      <div class="setting-row">
+        <span class="setting-label">Push Notifications</span>
+        <div class="toggle-switch toggle-on" onclick="toggle(this)">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">Email Notifications</span>
+        <div class="toggle-switch" onclick="toggle(this)">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">DM Message Alerts</span>
+        <div class="toggle-switch toggle-on" onclick="toggle(this)">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      <button class="save-btn" type="submit">Save Changes</button>
+    </form>
+    <div class="back-link" onclick="window.location.href='/settings/account.html'">← Back to Account Settings</div>
+  </div>
+</body>
+</html>
