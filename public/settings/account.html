@@ -1,135 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pixley – Account Settings</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <style>
-    body {
-      background: #121212;
-      color: #ffdf57;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .pixley-wordmark {
-      font-size: 2.1rem;
-      letter-spacing: 11px;
-      margin-top: 24px;
-      color: #ffdf57;
-      text-align: center;
-    }
-    .account-card {
-      background: #181818;
-      border-radius: 24px;
-      box-shadow: 0 4px 18px #0005;
-      margin: 36px auto 0 auto;
-      max-width: 420px;
-      padding: 32px 22px 18px 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .account-title {
-      color: #ffdf57;
-      font-size: 1.25rem;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-    }
-    .input-field {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 16px;
-      border-radius: 14px;
-      border: none;
-      background: #232323;
-      color: #ffdf57;
-      font-size: 1rem;
-      font-family: inherit;
-      letter-spacing: 1px;
-      outline: none;
-    }
-    .delete-btn {
-      background: #ff4444;
-      color: #fff;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-weight: bold;
-      border-radius: 14px;
-      padding: 13px;
-      border: none;
-      font-size: 1.09rem;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      box-shadow: 0 2px 12px #ffdf5733;
-      transition: background 0.17s, color 0.17s;
-      margin-top: 17px;
-      margin-bottom: 10px;
-    }
-    .delete-btn:hover {
-      background: #e02626;
-      color: #fffbe2;
-    }
-    .save-btn {
-      width: 100%;
-      background: #ffdf57;
-      color: #181818;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-weight: bold;
-      border-radius: 14px;
-      padding: 14px;
-      border: none;
-      font-size: 1.1rem;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      box-shadow: 0 2px 12px #ffdf5733;
-      transition: background 0.17s, color 0.17s;
-      margin-bottom: 10px;
-    }
-    .save-btn:hover {
-      background: #fffbe2;
-      color: #121212;
-    }
-    .link-list {
-      width: 100%;
-      margin-top: 16px;
-      margin-bottom: 8px;
-    }
-    .settings-link {
-      color: #ffdf57;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 1.08rem;
-      display: block;
-      margin-bottom: 7px;
-    }
-    .back-link {
-      color: #ffdf57;
-      text-decoration: underline;
-      margin-top: 15px;
-      cursor: pointer;
-      font-size: 1.07rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley – Account Settings</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .settings-card {
+    max-width: 420px;
+    margin: 40px auto;
+    background: #181818;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 16px #0005;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .setting-label { color: #ffdf57; margin-bottom: 6px; font-weight: 600; }
+  .input-field, select { width: 100%; padding: 12px; border-radius: 14px; border: none; background: #232323; color: #ffdf57; font-family: inherit; }
+  .toggle-switch { width: 48px; height: 26px; border-radius: 13px; background: #232323; position: relative; cursor: pointer; border: 1.2px solid #ffdf57; }
+  .toggle-slider { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #ffdf57; transition: left 0.17s; }
+  .toggle-on .toggle-slider { left: 25px; }
+  .save-btn { width: 100%; background: #ffdf57; color: #181818; font-family: 'Bebas Neue', Arial, sans-serif; font-weight: bold; border-radius: 14px; padding: 14px; border: none; font-size: 1.1rem; cursor: pointer; box-shadow: 0 2px 12px #ffdf5733; }
+  .save-btn:hover { background: #fffbe2; color: #121212; }
+</style>
 </head>
 <body>
-  <div class="pixley-wordmark">PIXLEY</div>
-  <div class="account-card">
-    <div class="account-title">Account Settings</div>
-    <form>
-      <input class="input-field" type="text" placeholder="Display Name">
-      <input class="input-field" type="email" placeholder="Email Address" required>
-      <input class="input-field" type="tel" placeholder="Phone Number">
-      <input class="input-field" type="password" placeholder="Change Password">
-      <button class="save-btn" type="submit">Save Changes</button>
-      <button class="delete-btn" type="button">Delete My Account</button>
-    </form>
-    <div class="link-list">
-      <a class="settings-link" href="/settings/privacy.html">Privacy Settings</a>
-      <a class="settings-link" href="/settings/notifications.html">Notification Settings</a>
-      <a class="settings-link" href="/settings/security.html">Security Settings</a>
-    </div>
-    <div class="back-link" onclick="window.location.href='/profile/settings.html'">← Back to Profile Settings</div>
-  </div>
+
+<div class="pixley-wordmark">P I X L E Y</div>
+
+<div class="settings-card" id="accountSettingsCard">
+  <div class="setting-label">Email</div>
+  <input id="email" class="input-field" type="email" disabled>
+
+  <div class="setting-label">Profile Visibility</div>
+  <select id="profileVisibility" class="input-field">
+    <option value="public">Public</option>
+    <option value="private">Private</option>
+  </select>
+
+  <div class="setting-label">DMs Enabled</div>
+  <div id="dmToggle" class="toggle-switch"><div class="toggle-slider"></div></div>
+
+  <div class="setting-label">Notifications</div>
+  <div id="notifToggle" class="toggle-switch toggle-on"><div class="toggle-slider"></div></div>
+
+  <button class="save-btn" onclick="saveAccountSettings()">Save Changes</button>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- Pixley App JS -->
+<script src="../assets/js/app.js"></script>
+
+<script>
+// Require login
+firebase.auth().onAuthStateChanged(async user => {
+  if (!user) {
+    window.location.href = '/auth/login.html';
+    return;
+  }
+
+  const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+  const data = userDoc.data();
+
+  document.getElementById('email').value = user.email;
+  document.getElementById('profileVisibility').value = data.visibility || 'public';
+  if (data.dmsEnabled) document.getElementById('dmToggle').classList.add('toggle-on');
+  if (data.notifications) document.getElementById('notifToggle').classList.add('toggle-on');
+});
+
+// Save account settings
+async function saveAccountSettings() {
+  const user = firebase.auth().currentUser;
+  if (!user) return;
+
+  const visibility = document.getElementById('profileVisibility').value;
+  const dmsEnabled = document.getElementById('dmToggle').classList.contains('toggle-on');
+  const notifications = document.getElementById('notifToggle').classList.contains('toggle-on');
+
+  await firebase.firestore().collection('users').doc(user.uid).update({
+    visibility,
+    dmsEnabled,
+    notifications
+  });
+
+  alert('Account settings saved!');
+}
+
+// Toggle handlers
+document.getElementById('dmToggle').onclick = () => { document.getElementById('dmToggle').classList.toggle('toggle-on'); };
+document.getElementById('notifToggle').onclick = () => { document.getElementById('notifToggle').classList.toggle('toggle-on'); };
+</script>
+
 </body>
 </html>
