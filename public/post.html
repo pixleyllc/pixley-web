@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pixley • New Post</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+</head>
+<body>
+  <div class="header-stretch-outer">
+    <div class="header-stretch-inner">
+      <div class="pixley-wordmark">P I X L<br>E Y</div>
+      <nav class="nav-bar">
+        <a href="feed.html" class="nav-icon" title="Feed"><span>🏠</span></a>
+        <a href="discover.html" class="nav-icon" title="Discover"><span>🔍</span></a>
+        <a href="post.html" class="nav-icon active" title="Post"><span>➕</span></a>
+        <a href="dm.html" class="nav-icon" title="DMs & Notifications"><span>💬</span></a>
+        <a href="profile.html" class="nav-icon" title="Profile"><span>👤</span></a>
+      </nav>
+    </div>
+  </div>
+  <div class="post-form-container">
+    <form id="createPostForm" autocomplete="off">
+      <textarea id="caption" class="post-caption-input" maxlength="300" placeholder="What's on your mind? (max 300 chars)" required></textarea>
+      <input type="file" id="imageUpload" accept="image/*" class="post-image-input">
+      <div id="imagePreview" class="image-preview"></div>
+      <button type="submit" class="post-submit-btn">Post to Pixley</button>
+    </form>
+    <div id="postStatusMsg" class="post-status-msg"></div>
+  </div>
+  <script src="app.js"></script>
+  <script src="post.js"></script>
+</body>
+</html>
