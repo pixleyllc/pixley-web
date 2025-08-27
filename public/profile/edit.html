@@ -5,23 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixley – Edit Profile</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .edit-card {
+    max-width: 420px;
+    margin: 40px auto;
+    background: #181818;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 16px #0005;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .input-field { width: 100%; padding: 12px; border-radius: 14px; border: none; background: #232323; color: #ffdf57; font-family: inherit; font-size: 1rem; outline: none; margin-bottom: 12px; }
+  .submit-btn { background: #ffdf57; color: #181818; font-family: 'Bebas Neue', Arial, sans-serif; font-weight: bold; border-radius: 14px; padding: 14px; border: none; font-size: 1.1rem; cursor: pointer; box-shadow: 0 2px 12px #ffdf5733; }
+  .submit-btn:hover { background: #fffbe2; color: #121212; }
+</style>
 </head>
 <body>
 
 <div class="pixley-wordmark">P I X L E Y</div>
 
-<div class="page">
-  <div class="inner">
-    <div class="profile-header" id="editProfileHeader"></div>
-
-    <div class="edit-form" id="editForm">
-      <input id="displayName" class="input-field" type="text" placeholder="Display Name">
-      <input id="username" class="input-field" type="text" placeholder="Username" disabled>
-      <textarea id="bio" class="input-field" placeholder="Bio"></textarea>
-      <input id="photoURL" class="input-field" type="text" placeholder="Profile Picture URL">
-      <button class="submit-btn" onclick="saveProfile()">Save Changes</button>
-    </div>
-  </div>
+<div class="edit-card">
+  <input id="displayName" class="input-field" type="text" placeholder="Display Name">
+  <textarea id="bio" class="input-field" placeholder="Bio"></textarea>
+  <input id="photoURL" class="input-field" type="text" placeholder="Profile Picture URL">
+  <button class="submit-btn" onclick="saveProfile()">Save Changes</button>
 </div>
 
 <!-- Firebase SDKs -->
@@ -33,47 +42,32 @@
 <script src="../assets/js/app.js"></script>
 
 <script>
-// Require login
+// Redirect if not logged in
 firebase.auth().onAuthStateChanged(async user => {
-  if (!user) {
-    window.location.href = '/auth/login.html';
-    return;
-  }
+  if(!user) window.location.href='/auth/login.html';
 
-  const docRef = firebase.firestore().collection('users').doc(user.uid);
-  const doc = await docRef.get();
+  const doc = await firebase.firestore().collection('users').doc(user.uid).get();
   const data = doc.data();
-
-  // Fill form with current user data
   document.getElementById('displayName').value = data.displayName || '';
-  document.getElementById('username').value = data.username || '';
   document.getElementById('bio').value = data.bio || '';
   document.getElementById('photoURL').value = data.photoURL || '';
 });
 
-// Save profile changes
+// Save changes
 async function saveProfile() {
   const user = firebase.auth().currentUser;
-  if (!user) return;
+  if(!user) return;
 
   const displayName = document.getElementById('displayName').value;
   const bio = document.getElementById('bio').value;
   const photoURL = document.getElementById('photoURL').value;
 
   try {
-    // Update Firebase Auth profile
     await user.updateProfile({ displayName, photoURL });
-
-    // Update Firestore user doc
-    await firebase.firestore().collection('users').doc(user.uid).update({
-      displayName,
-      bio,
-      photoURL
-    });
-
+    await firebase.firestore().collection('users').doc(user.uid).update({ displayName, bio, photoURL });
     alert('Profile updated!');
-  } catch (err) {
-    alert('Error updating profile: ' + err.message);
+  } catch(err) {
+    alert('Error: ' + err.message);
   }
 }
 </script>
