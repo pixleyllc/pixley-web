@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – DMs</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 10px;
+      margin-top: 20px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .dm-list {
+      max-width: 390px;
+      margin: 36px auto 0 auto;
+      padding: 0 6vw;
+    }
+    .dm-item {
+      background: #181818;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0004;
+      margin-bottom: 16px;
+      padding: 18px 14px 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .dm-item:hover {
+      background: #222;
+    }
+    .dm-pic {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #232323;
+      margin-right: 6px;
+    }
+    .dm-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .dm-username {
+      font-size: 1.1rem;
+      color: #ffdf57;
+      letter-spacing: 1px;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+    }
+    .dm-preview {
+      font-size: 0.97rem;
+      color: #bbb;
+      font-family: Arial, sans-serif;
+    }
+    .dm-timestamp {
+      color: #777;
+      font-size: 0.97rem;
+      margin-left: 8px;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="dm-list">
+    <div class="dm-item">
+      <div class="dm-pic"></div>
+      <div class="dm-info">
+        <div class="dm-username">ari_dream <span class="dm-timestamp">2m ago</span></div>
+        <div class="dm-preview">Pixley app is looking 🔥!</div>
+      </div>
+    </div>
+    <div class="dm-item">
+      <div class="dm-pic"></div>
+      <div class="dm-info">
+        <div class="dm-username">fitguy <span class="dm-timestamp">12m ago</span></div>
+        <div class="dm-preview">Sent you a new post</div>
+      </div>
+    </div>
+    <div class="dm-item">
+      <div class="dm-pic"></div>
+      <div class="dm-info">
+        <div class="dm-username">zackthegoat <span class="dm-timestamp">1h ago</span></div>
+        <div class="dm-preview">Let’s get this bread 🥖</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
