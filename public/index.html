@@ -7,48 +7,17 @@
 
   <!-- Locked-in CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .subtitle {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 1rem;
-      color: #ffdf57cc;
-    }
-    .cta-btn {
-      display: inline-block;
-      margin-top: 32px;
-      background: #ffdf57;
-      color: #181818;
-      font-size: 1.2rem;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-weight: bold;
-      border-radius: 18px;
-      border: none;
-      padding: 14px 38px;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s;
-      text-decoration: none;
-      box-shadow: 0 4px 16px #ffdf5720;
-    }
-    .cta-btn:hover {
-      background: #fffbe2;
-      color: #121212;
-    }
-  </style>
 </head>
 <body>
 
   <!-- Wordmark -->
   <div class="pixley-wordmark">P I X L E Y</div>
 
-  <!-- Subtitle -->
+  <!-- Subtitle (optional) -->
   <div class="subtitle">
     Built for creators. Get paid for your content. <br>
     Welcome to the future of social media.
   </div>
-
-  <!-- Call-to-action -->
-  <a class="cta-btn" href="/auth/signup">Get Started</a>
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -57,6 +26,22 @@
 
   <!-- Pixley App JS -->
   <script src="assets/js/app.js"></script>
+
+  <!-- Automatic login redirect logic -->
+  <script>
+    // AUTO-REDIRECT USERS
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // Logged in → go to feed
+        window.location.href = '/feed.html';
+      } else {
+        // Logged out → go to login page
+        if (!window.location.pathname.endsWith('login.html')) {
+          window.location.href = '/auth/login.html';
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>
