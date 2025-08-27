@@ -3,21 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixley – Home</title>
-
-  <!-- Locked-in CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Pixley Redirect</title>
 </head>
 <body>
-
-  <!-- Wordmark -->
-  <div class="pixley-wordmark">P I X L E Y</div>
-
-  <!-- Subtitle (optional) -->
-  <div class="subtitle">
-    Built for creators. Get paid for your content. <br>
-    Welcome to the future of social media.
-  </div>
+  <!-- NO splash content, no CTA -->
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -27,21 +16,17 @@
   <!-- Pixley App JS -->
   <script src="assets/js/app.js"></script>
 
-  <!-- Automatic login redirect logic -->
+  <!-- Auto-redirect logic -->
   <script>
-    // AUTO-REDIRECT USERS
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        // Logged in → go to feed
+        // User is signed in → go to feed
         window.location.href = '/feed.html';
       } else {
-        // Logged out → go to login page
-        if (!window.location.pathname.endsWith('login.html')) {
-          window.location.href = '/auth/login.html';
-        }
+        // User is not signed in → go to login
+        window.location.href = '/auth/login.html';
       }
     });
   </script>
-
 </body>
 </html>
