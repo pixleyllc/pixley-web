@@ -1,45 +1,58 @@
-<!doctype html>
-<html lang="en" data-page="feed">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
-  <title>Pixley • Feed</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Home</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .pixley-wordmark {
+      margin-top: 32px;
+      font-size: 3rem;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      letter-spacing: 16px;
+      color: #ffdf57;
+    }
+    .subtitle {
+      margin-top: 12px;
+      color: #bbb;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      font-family: Arial, sans-serif;
+    }
+    .cta-btn {
+      display: inline-block;
+      margin-top: 32px;
+      background: #ffdf57;
+      color: #181818;
+      font-size: 1.2rem;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-weight: bold;
+      border-radius: 18px;
+      border: none;
+      padding: 14px 38px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      text-decoration: none;
+      box-shadow: 0 4px 16px #ffdf5720;
+    }
+    .cta-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+  </style>
 </head>
 <body>
-  <div class="header-stretch">
-    <div class="header-stretch-inner">
-      <div style="width:28px"></div>
-      <h1 class="wordmark">P I X L E Y</h1>
-      <div style="width:28px"></div>
-    </div>
-  </div>
-
-  <nav class="nav">
-    <a class="tab active" href="index.html" title="Feed">🏠</a>
-    <a class="tab" href="discover.html" title="Discover">🔍</a>
-    <a class="tab" href="post.html" title="Post">➕</a>
-    <a class="tab" href="dm-notifications.html" title="DMs & Notifications">💬</a>
-    <a class="tab" href="profile.html" title="Profile">👤</a>
-  </nav>
-
-  <main class="page">
-    <div class="inner">
-      <!-- Stories tray -->
-      <section class="stories" id="stories">
-        <div class="story"><img src="./assets/default-pfp.jpg" alt=""><div>you</div></div>
-        <div class="story"><img src="./assets/default-pfp.jpg" alt=""><div>friend</div></div>
-      </section>
-
-      <section class="feed" id="feed"></section>
-    </div>
-  </main>
-
-  <!-- Provide your Firebase config here to enable real posts -->
-  <script id="fb-config" type="application/json">
-  { "projectId": "pixley-4632c" }
-  </script>
-  <script src="./app.js"></script>
+  <div class="pixley-wordmark">P I X L E Y</div>
+  <div class="subtitle">Built for creators. Get paid for your content. <br>Welcome to the future of social media.</div>
+  <a class="cta-btn" href="/auth/signup">Get Started</a>
 </body>
 </html>
