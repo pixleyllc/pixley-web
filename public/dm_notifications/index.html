@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixley – DMs & Notifications</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  .dm-card, .notif-card {
+    background: #17171a;
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px #0005;
+  }
+  .message-user {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .message-text {
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<div class="pixley-wordmark">P I X L E Y</div>
+
+<div class="page">
+  <div class="inner">
+    <h2 style="color:#ffdf57;">Messages</h2>
+    <div id="dmContainer"></div>
+
+    <h2 style="color:#ffdf57;">Notifications</h2>
+    <div id="notifContainer"></div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- Pixley App JS -->
+<script src="../assets/js/app.js"></script>
+
+<script>
+// Require login
+firebase.auth().onAuthStateChanged(async user => {
+  if (!user) {
+    window.location.href = '/auth/login.html';
+    return;
+  }
+
+  const dmContainer = document.getElementById('dmContainer');
+  const notifContainer = document.getElementById('notifContainer');
+
+  dmContainer.innerHTML = '';
+  notifContainer.innerHTML = '';
+
+  // Fetch DMs
+  const dmSnapshot = await firebase.firestore().collection('messages')
+    .where('participants', 'array-contains', user.uid)
+    .orderBy('createdAt', 'desc')
+    .limit(50)
+    .get();
+
+  dmSnapshot.forEach(doc => {
+    const msg = doc.data();
+    const msgCard = document.createElement('div');
+    msgCard.className = 'dm-card';
+    msgCard.innerHTML = `
+      <div class="message-user">@${msg.senderUsername}</div>
+      <div class="message-text">${msg.text}</div>
+    `;
+    dmContainer.appendChild(msgCard);
+  });
+
+  // Fetch Notifications
+  const notifSnapshot = await firebase.firestore().collection('notifications')
+    .where('userId', '==', user.uid)
+    .orderBy('createdAt', 'desc')
+    .limit(50)
+    .get();
+
+  notifSnapshot.forEach(doc => {
+    const notif = doc.data();
+    const notifCard = document.createElement('div');
+    notifCard.className = 'notif-card';
+    notifCard.innerHTML = `
+      <div>@${notif.actorUsername} ${notif.type}</div>
+    `;
+    notifContainer.appendChild(notifCard);
+  });
+});
+</script>
+
+</body>
+</html>
