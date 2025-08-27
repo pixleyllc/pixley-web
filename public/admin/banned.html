@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Admin: Banned Users</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .admin-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 440px;
+      padding: 32px 22px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .admin-title {
+      color: #ffdf57;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .banned-list {
+      width: 100%;
+    }
+    .banned-row {
+      background: #232323;
+      border-radius: 12px;
+      margin-bottom: 13px;
+      padding: 12px 15px;
+      font-size: 1.04rem;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 1px 8px #0003;
+    }
+    .banned-pic {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #323232;
+      border: 2px solid #ff4444;
+    }
+    .banned-username {
+      color: #ff4444;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      flex: 1;
+      font-size: 1.09rem;
+    }
+    .unban-btn {
+      background: #ffdf57;
+      color: #181818;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      padding: 6px 13px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      margin-left: 5px;
+    }
+    .unban-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 22px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="admin-card">
+    <div class="admin-title">Banned Users</div>
+    <div class="banned-list">
+      <div class="banned-row">
+        <div class="banned-pic"></div>
+        <div class="banned-username">@unknown_user42</div>
+        <button class="unban-btn">Unban</button>
+      </div>
+      <div class="banned-row">
+        <div class="banned-pic"></div>
+        <div class="banned-username">@spammer44</div>
+        <button class="unban-btn">Unban</button>
+      </div>
+    </div>
+    <div class="back-link" onclick="window.location.href='/admin'">← Back to Admin Dashboard</div>
+  </div>
+</body>
+</html>
