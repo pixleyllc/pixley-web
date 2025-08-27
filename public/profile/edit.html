@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Edit Profile</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .edit-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 390px;
+      padding: 28px 18px 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .edit-title {
+      color: #ffdf57;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      border: none;
+      background: #232323;
+      color: #ffdf57;
+      font-size: 1rem;
+      font-family: inherit;
+      letter-spacing: 1px;
+      outline: none;
+    }
+    .save-btn {
+      width: 100%;
+      background: #ffdf57;
+      color: #181818;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      font-weight: bold;
+      border-radius: 14px;
+      padding: 14px;
+      border: none;
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #ffdf5733;
+      transition: background 0.17s, color 0.17s;
+      margin-bottom: 10px;
+    }
+    .save-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="edit-card">
+    <div class="edit-title">Edit Your Profile</div>
+    <form>
+      <input class="input-field" type="text" placeholder="Display Name" required>
+      <input class="input-field" type="text" placeholder="Username" required>
+      <textarea class="input-field" placeholder="Bio" rows="3"></textarea>
+      <input class="input-field" type="file" accept="image/*">
+      <button class="save-btn" type="submit">Save Changes</button>
+    </form>
+    <div class="back-link" onclick="window.location.href='/profile'">← Back to Profile</div>
+  </div>
+</body>
+</html>
