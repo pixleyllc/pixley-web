@@ -13,8 +13,8 @@
         "type": 301
       },
       {
-        "source": "/:page.html",
-        "destination": "/:page",
+        "source": "/**.html",
+        "destination": "/$1",
         "type": 301
       }
     ],
@@ -24,12 +24,8 @@
         "destination": "/index.html"
       },
       {
-        "source": "/:page",
-        "destination": "/:page.html"
-      },
-      {
-        "source": "/:page/",
-        "destination": "/:page.html"
+        "source": "/**",
+        "destination": "/$1.html"
       }
     ]
   }
