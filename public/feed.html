@@ -6,24 +6,24 @@
 <title>Pixley – Feed</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  .feed-container { max-width: 420px; margin: 12px auto; padding: 12px; }
+  body { margin:0; background:#121212; color:#ffdf57; font-family:'Bebas Neue', Arial, sans-serif; }
+  .pixley-wordmark { text-align:center; font-size:22px; letter-spacing:.35rem; color:#F5E27A; margin:12px 0; }
+  .header-stretch{ width:100%; display:flex; justify-content:center; position:sticky; top:0; z-index:1000; background:#0f0f11; border-bottom:1px solid rgba(255,255,255,0.05); }
+  .header-stretch-inner{ width:100%; max-width:420px; display:flex; align-items:center; justify-content:space-between; padding:10px 12px; }
+  .nav{ width:100%; display:flex; gap:8px; align-items:center; justify-content:space-between; padding:8px 12px 10px; }
+  .nav .tab{ flex:1; display:flex; align-items:center; justify-content:center; padding:10px 0; border-radius:999px; font-size:18px; color:#a9a9ad; text-decoration:none; border:1px solid rgba(255,255,255,0.06); }
+  .nav .tab.active{ color:#000; background:#F5E27A; box-shadow:0 0 18px rgba(245,226,122,0.35); font-weight:600; }
+  .feed-container { max-width:420px; margin:12px auto; padding:12px; }
   .post-card { background:#17171a; border-radius:16px; margin-bottom:12px; padding:12px; box-shadow:0 4px 12px #0005; }
   .post-user { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-weight:bold; }
   .post-user img { width:28px; height:28px; border-radius:50%; }
   .post-caption { font-size:14px; line-height:1.35; margin-bottom:8px; }
   .post-media img { width:100%; height:auto; border-radius:12px; }
   .post-actions { display:flex; gap:12px; font-size:18px; }
-  .pixley-wordmark { font-family:'Bebas Neue', Arial, sans-serif; font-size:22px; letter-spacing:.35rem; color:#F5E27A; text-align:center; margin:12px 0; }
-  .header-stretch{ width:100%; display:flex; justify-content:center; position:sticky; top:0; z-index:1000; background:#0f0f11; border-bottom:1px solid rgba(255,255,255,0.05); }
-  .header-stretch-inner{ width:100%; max-width:420px; display:flex; align-items:center; justify-content:space-between; padding:10px 12px; }
-  .nav{ width:100%; display:flex; gap:8px; align-items:center; justify-content:space-between; padding:8px 12px 10px; }
-  .nav .tab{ flex:1; display:flex; align-items:center; justify-content:center; padding:10px 0; border-radius:999px; font-size:18px; color:#a9a9ad; text-decoration:none; border:1px solid rgba(255,255,255,0.06); }
-  .nav .tab.active{ color:#000; background:#F5E27A; box-shadow:0 0 18px rgba(245,226,122,0.35); font-weight:600; }
 </style>
 </head>
 <body>
 
-<!-- Top nav bar -->
 <div class="header-stretch">
   <div class="header-stretch-inner">
     <div class="wordmark">P I X L E Y</div>
@@ -37,7 +37,6 @@
   </div>
 </div>
 
-<!-- Feed container -->
 <div class="feed-container" id="feedContainer"></div>
 
 <!-- Firebase SDKs -->
@@ -45,11 +44,10 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<!-- App JS -->
+<!-- Pixley App JS -->
 <script src="assets/js/app.js"></script>
 
 <script>
-// Auth check & dynamic feed
 firebase.auth().onAuthStateChanged(async user=>{
   if(!user){
     window.location.href='/auth/login.html';
@@ -63,8 +61,8 @@ firebase.auth().onAuthStateChanged(async user=>{
     .orderBy('createdAt','desc').limit(50).get();
 
   postsSnapshot.forEach(doc=>{
-    const post = doc.data();
-    const postDiv = document.createElement('div');
+    const post=doc.data();
+    const postDiv=document.createElement('div');
     postDiv.className='post-card';
     postDiv.innerHTML=`
       <div class="post-user">
