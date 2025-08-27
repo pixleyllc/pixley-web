@@ -12,7 +12,7 @@ const firebaseConfig = {
 };
 
 // 2. Initialize Firebase
-if (!firebase.apps.length) {
+if(!firebase.apps.length){
   firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app();
@@ -22,52 +22,85 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// ===== USER AUTH FUNCTIONS =====
+// ==== USER AUTH FUNCTIONS ====
+
+// Check if user is logged in and redirect if needed
 auth.onAuthStateChanged(user => {
-  console.log(user ? "Logged in as " + user.email : "No user logged in");
+  if(user){
+    // Optionally, store user info in global variable
+    window.currentUser = user;
+  } else {
+    // Redirect to login for protected pages
+    if(!window.location.href.includes('/auth/')){
+      window.location.href='/auth/login.html';
+    }
+  }
 });
 
-function pixleyRegister(email, password) {
-  return auth.createUserWithEmailAndPassword(email, password)
-    .then(userCred => alert("Welcome to Pixley, " + userCred.user.email + "!"))
-    .catch(err => alert("Sign up failed: " + err.message));
+// ==== PROFILE HELPERS ====
+
+// Get user profile info from Firestore
+async function getUserProfile(uid){
+  const doc = await db.collection('users').doc(uid).get();
+  return doc.exists ? doc.data() : null;
 }
 
-function pixleyLogin(email, password) {
-  return auth.signInWithEmailAndPassword(email, password)
-    .then(userCred => alert("Logged in as " + userCred.user.email))
-    .catch(err => alert("Login failed: " + err.message));
+// Update user profile
+async function updateProfile({displayName, bio, photoURL}){
+  const user = auth.currentUser;
+  if(!user) return;
+
+  await user.updateProfile({displayName, photoURL});
+  await db.collection('users').doc(user.uid).update({displayName, bio, photoURL});
 }
 
-function pixleyLogout() {
-  return auth.signOut().then(() => alert("Logged out!"));
+// ==== POST HELPERS ====
+
+// Create a new post
+async function createPost({caption, mediaURL}){
+  const user = auth.currentUser;
+  if(!user) return;
+
+  await db.collection('posts').add({
+    userId: user.uid,
+    username: user.displayName,
+    userPhotoURL: user.photoURL,
+    caption,
+    mediaURL: mediaURL || '',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
 }
 
-function pixleyResetPassword(email) {
-  return auth.sendPasswordResetEmail(email)
-    .then(() => alert("Password reset email sent!"))
-    .catch(err => alert("Failed to send reset: " + err.message));
+// Load posts dynamically into container
+async function loadFeed(containerId){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+
+  container.innerHTML = '';
+
+  const snapshot = await db.collection('posts').orderBy('createdAt','desc').limit(50).get();
+  snapshot.forEach(doc => {
+    const post = doc.data();
+    const postDiv = document.createElement('div');
+    postDiv.className = 'post-card';
+    postDiv.innerHTML = `
+      <div class="post-user">
+        <img src="${post.userPhotoURL}" alt="${post.username}">
+        <div>@${post.username}</div>
+      </div>
+      <div class="post-caption">${post.caption}</div>
+      ${post.mediaURL?`<div class="post-media"><img src="${post.mediaURL}" alt="media"></div>`:''}
+      <div class="post-actions">❤️ 🔁 💬</div>
+    `;
+    container.appendChild(postDiv);
+  });
 }
 
-// ===== POSTS SECTION =====
-function pixleyAddPost(postData) {
-  return db.collection("posts").add(postData)
-    .then(docRef => alert("Post created! ID: " + docRef.id))
-    .catch(err => alert("Failed to create post: " + err.message));
-}
+// ==== DISCOVER / SEARCH HELPERS ====
+// (add your dynamic discover functionality here)
 
-function pixleyGetPosts() {
-  return db.collection("posts")
-    .orderBy("createdAt", "desc")
-    .limit(20)
-    .get()
-    .then(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-}
+// ==== DMS / NOTIFICATIONS ====
+// (add your dynamic DM / notification functions here)
 
-// Export functions to global
-window.pixleyRegister = pixleyRegister;
-window.pixleyLogin = pixleyLogin;
-window.pixleyLogout = pixleyLogout;
-window.pixleyResetPassword = pixleyResetPassword;
-window.pixleyAddPost = pixleyAddPost;
-window.pixleyGetPosts = pixleyGetPosts;
+// ==== LIVE / STORIES HELPERS ====
+// (add your live stream and stories helper functions here)
