@@ -1,6 +1,6 @@
 // ==== Pixley App Core Script ====
 
-// 1. Firebase Config (full Pixley locked branding)
+// 1. Firebase Config (locked-in Pixley production)
 const firebaseConfig = {
   apiKey: "AIzaSyDHX_86B2eFSA3jgGkNgVlL57Crd2RoIf8",
   authDomain: "pixley-4632c.firebaseapp.com",
@@ -22,7 +22,7 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// ===== USER AUTH =====
+// ===== USER AUTH FUNCTIONS =====
 auth.onAuthStateChanged(user => {
   console.log(user ? "Logged in as " + user.email : "No user logged in");
 });
@@ -64,7 +64,7 @@ function pixleyGetPosts() {
     .then(snapshot => snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
 }
 
-// EXPORT FUNCTIONS TO GLOBAL
+// Export functions to global
 window.pixleyRegister = pixleyRegister;
 window.pixleyLogin = pixleyLogin;
 window.pixleyLogout = pixleyLogout;
