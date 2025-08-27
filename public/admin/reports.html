@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixley – Admin: Reports</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pixley-wordmark {
+      font-size: 2.1rem;
+      letter-spacing: 11px;
+      margin-top: 24px;
+      color: #ffdf57;
+      text-align: center;
+    }
+    .admin-card {
+      background: #181818;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px #0005;
+      margin: 36px auto 0 auto;
+      max-width: 440px;
+      padding: 32px 22px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .admin-title {
+      color: #ffdf57;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .report-list {
+      width: 100%;
+    }
+    .report-row {
+      background: #232323;
+      border-radius: 12px;
+      margin-bottom: 13px;
+      padding: 12px 15px;
+      font-size: 1.04rem;
+      color: #ffdf57;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      box-shadow: 0 1px 8px #0003;
+    }
+    .report-details {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      font-size: 0.98rem;
+      margin-top: 2px;
+    }
+    .admin-action-btn {
+      background: #ffdf57;
+      color: #181818;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Bebas Neue', Arial, sans-serif;
+      padding: 6px 13px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      margin-top: 7px;
+      margin-right: 7px;
+    }
+    .admin-action-btn:hover {
+      background: #fffbe2;
+      color: #121212;
+    }
+    .back-link {
+      color: #ffdf57;
+      text-decoration: underline;
+      margin-top: 22px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="pixley-wordmark">PIXLEY</div>
+  <div class="admin-card">
+    <div class="admin-title">Reports / Moderation</div>
+    <div class="report-list">
+      <div class="report-row">
+        <div><b>Reported Post by @fitguy</b></div>
+        <div class="report-details">Spam content in comment: “Check out my profile for free V-bucks!”</div>
+        <button class="admin-action-btn">Remove Post</button>
+        <button class="admin-action-btn">Dismiss</button>
+      </div>
+      <div class="report-row">
+        <div><b>User Report: @unknown_user42</b></div>
+        <div class="report-details">Harassment in DMs reported by @ari_dream</div>
+        <button class="admin-action-btn">Ban User</button>
+        <button class="admin-action-btn">Dismiss</button>
+      </div>
+    </div>
+    <div class="back-link" onclick="window.location.href='/admin'">← Back to Admin Dashboard</div>
+  </div>
+</body>
+</html>
