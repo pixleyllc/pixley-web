@@ -1,82 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixley – Feed</title>
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  body { margin:0; background:#121212; color:#ffdf57; font-family:'Bebas Neue', Arial, sans-serif; }
-  .pixley-wordmark { text-align:center; font-size:22px; letter-spacing:.35rem; color:#F5E27A; margin:12px 0; }
-  .header-stretch{ width:100%; display:flex; justify-content:center; position:sticky; top:0; z-index:1000; background:#0f0f11; border-bottom:1px solid rgba(255,255,255,0.05); }
-  .header-stretch-inner{ width:100%; max-width:420px; display:flex; align-items:center; justify-content:space-between; padding:10px 12px; }
-  .nav{ width:100%; display:flex; gap:8px; align-items:center; justify-content:space-between; padding:8px 12px 10px; }
-  .nav .tab{ flex:1; display:flex; align-items:center; justify-content:center; padding:10px 0; border-radius:999px; font-size:18px; color:#a9a9ad; text-decoration:none; border:1px solid rgba(255,255,255,0.06); }
-  .nav .tab.active{ color:#000; background:#F5E27A; box-shadow:0 0 18px rgba(245,226,122,0.35); font-weight:600; }
-  .feed-container { max-width:420px; margin:12px auto; padding:12px; }
-  .post-card { background:#17171a; border-radius:16px; margin-bottom:12px; padding:12px; box-shadow:0 4px 12px #0005; }
-  .post-user { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-weight:bold; }
-  .post-user img { width:28px; height:28px; border-radius:50%; }
-  .post-caption { font-size:14px; line-height:1.35; margin-bottom:8px; }
-  .post-media img { width:100%; height:auto; border-radius:12px; }
-  .post-actions { display:flex; gap:12px; font-size:18px; }
-</style>
+  <meta charset="UTF-8">
+  <title>Pixley • Feed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 </head>
 <body>
-
-<div class="header-stretch">
-  <div class="header-stretch-inner">
-    <div class="wordmark">P I X L E Y</div>
-    <div class="nav">
-      <a class="tab" href="/feed.html">🏠</a>
-      <a class="tab" href="/discover/index.html">🔍</a>
-      <a class="tab" href="/post/create.html">➕</a>
-      <a class="tab" href="/dm_notifications/index.html">💬</a>
-      <a class="tab" href="/profile/index.html">👤</a>
+  <div class="header-stretch-outer">
+    <div class="header-stretch-inner">
+      <div class="pixley-wordmark">P I X L<br>E Y</div>
+      <nav class="nav-bar">
+        <a href="feed.html" class="nav-icon active" title="Feed"><span>🏠</span></a>
+        <a href="discover.html" class="nav-icon" title="Discover"><span>🔍</span></a>
+        <a href="post.html" class="nav-icon" title="Post"><span>➕</span></a>
+        <a href="dm.html" class="nav-icon" title="DMs & Notifications"><span>💬</span></a>
+        <a href="profile.html" class="nav-icon" title="Profile"><span>👤</span></a>
+      </nav>
     </div>
   </div>
-</div>
-
-<div class="feed-container" id="feedContainer"></div>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
-<!-- Pixley App JS -->
-<script src="assets/js/app.js"></script>
-
-<script>
-firebase.auth().onAuthStateChanged(async user=>{
-  if(!user){
-    window.location.href='/auth/login.html';
-    return;
-  }
-
-  const container=document.getElementById('feedContainer');
-  container.innerHTML='';
-
-  const postsSnapshot = await firebase.firestore().collection('posts')
-    .orderBy('createdAt','desc').limit(50).get();
-
-  postsSnapshot.forEach(doc=>{
-    const post=doc.data();
-    const postDiv=document.createElement('div');
-    postDiv.className='post-card';
-    postDiv.innerHTML=`
-      <div class="post-user">
-        <img src="${post.userPhotoURL}" alt="${post.username}">
-        <div>@${post.username}</div>
-      </div>
-      <div class="post-caption">${post.caption}</div>
-      ${post.mediaURL?`<div class="post-media"><img src="${post.mediaURL}" alt="media"></div>`:''}
-      <div class="post-actions">❤️ 🔁 💬</div>
-    `;
-    container.appendChild(postDiv);
-  });
-});
-</script>
-
+  <div id="storyTray" class="story-tray"></div>
+  <div id="feedContainer" class="feed-container"></div>
+  <script src="app.js"></script>
 </body>
 </html>
