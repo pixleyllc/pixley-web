@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixley – Feed</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .feed-container { max-width: 420px; margin: 0 auto; padding: 12px; }
+  .story-tray { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 12px; }
+  .story { width: 70px; text-align: center; color: #ffdf57cc; }
+  .story img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid #F5E27A; box-shadow: 0 0 18px rgba(245,226,122,0.35); }
+  .post-card { background: #17171a; border-radius: 16px; margin-bottom: 12px; padding: 12px; box-shadow: 0 4px 12px #0005; }
+  .post-user { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: bold; }
+  .post-user img { width: 28px; height: 28px; border-radius: 50%; }
+  .post-caption { font-size: 14px; line-height: 1.35; margin-bottom: 8px; }
+</style>
 </head>
 <body>
 
@@ -21,6 +31,7 @@
 <script src="assets/js/app.js"></script>
 
 <script>
+// Require login
 firebase.auth().onAuthStateChanged(async user => {
   if(!user){
     window.location.href='/auth/login.html';
@@ -30,10 +41,23 @@ firebase.auth().onAuthStateChanged(async user => {
   const feedContainer = document.getElementById('feedContainer');
   feedContainer.innerHTML='';
 
-  // Fetch dynamic posts from Firestore
+  // Load dynamic stories
+  const storiesSnapshot = await firebase.firestore().collection('stories')
+    .orderBy('createdAt','desc').limit(20).get();
+  const storyTray = document.createElement('div');
+  storyTray.className='story-tray';
+  storiesSnapshot.forEach(doc => {
+    const story = doc.data();
+    const storyEl = document.createElement('div');
+    storyEl.className='story';
+    storyEl.innerHTML=`<img src="${story.photoURL}" alt="${story.username}"><div>@${story.username}</div>`;
+    storyTray.appendChild(storyEl);
+  });
+  feedContainer.appendChild(storyTray);
+
+  // Load dynamic posts
   const postsSnapshot = await firebase.firestore().collection('posts')
     .orderBy('createdAt','desc').limit(50).get();
-
   postsSnapshot.forEach(doc=>{
     const post = doc.data();
     const postCard = document.createElement('div');
@@ -51,5 +75,6 @@ firebase.auth().onAuthStateChanged(async user => {
   });
 });
 </script>
+
 </body>
 </html>
